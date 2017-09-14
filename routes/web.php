@@ -1,9 +1,10 @@
  <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+
+
+#pages controller front/welcome
+Route::get('/', 'PagesController@index')->name('index');
 
 Auth::routes();
 
@@ -20,4 +21,14 @@ Route::prefix('admin')->group(function() {
 	Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 	
 	Route::get('/', 'AdminController@index')->name('admin.dashboard');
+});
+
+
+// temporary
+Route::get('/admin-template', function() {
+	return view('admin_template');
+});
+
+Route::get('/template', function() {
+	return view('template');
 });

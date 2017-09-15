@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" media="screen">
-    <link rel="stylesheet" href="{{ url('css/custom.min.css') }}">
+    <link rel="stylesheet" href="{{ url('css/bootstrap-theme.min.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ url('css/custom.min.css') }}" media="screen">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
@@ -54,10 +55,10 @@
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                         cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum 
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum. . .
                         <br />
                         <div style=" margin-top: 5px;">
-                          <a href="#" class="btn btn-info btn-xs">Read more
+                          <a href="#" class="btn btn-primary btn-xs">Read more
                           <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                           </a>
                         </div>
@@ -84,10 +85,10 @@
                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum. . .
                         <br />
                         <div style=" margin-top: 5px;">
-                          <a href="#" class="btn btn-info btn-xs">Read more
+                          <a href="#" class="btn btn-primary btn-xs">Read more
                           <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                           </a>
                         </div>
@@ -96,25 +97,17 @@
 
                 <hr />
 
-                <nav class="col-md-offset-5" aria-label="Page navigation">
-                    <ul class="pagination">
-                      <li>
-                        <a href="#" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                        </a>
-                      </li>
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">5</a></li>
-                      <li>
-                        <a href="#" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>
+
+                {{-- pagination --}}
+                  <nav aria-label="...">
+                    <ul class="pager">
+                      <li><a href="#">Previous</a></li>
+                      <li><a href="#">Next</a></li>
                     </ul>
                   </nav>
+                {{-- / pagination --}}
+                
+
 
                 {{-- / content --}}
             </div>
@@ -137,7 +130,6 @@
                 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                <button type="button" class="btn btn-danger">Test</button>
             </div>
         </div>
 

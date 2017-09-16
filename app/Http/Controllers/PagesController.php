@@ -16,13 +16,4 @@ class PagesController extends Controller
     	return view('book-lists');
     }
 
-    public function students()
-    {
-        return view('students');
-    }
-
-    public function committees()
-    {
-    	return view('committees');
-    }
 }

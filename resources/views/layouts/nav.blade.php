@@ -26,19 +26,6 @@
               </a>
             </li>
 
-            <li class="@active('students', 'active')">
-              <a href="{{ route('students') }}">
-                <i class="fa fa-users"></i>
-                Student's
-              </a>
-            </li>
-
-            <li class="@active('committees', 'active')">
-              <a href="{{ route('committees') }}">
-                <i class="fa fa-users"></i>
-                Committee's
-              </a>
-            </li>
             
           </ul>
           
@@ -49,7 +36,7 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             
-            <li class="@active('login', 'active')">
+            <li class="@active('login', 'active') @active('admin/login', 'active')">
                 <a href="{{ url('login') }}">
                   <i class="fa fa-sign-in"></i>
                   Signin 

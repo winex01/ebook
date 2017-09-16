@@ -9,9 +9,9 @@
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="{{ url('adminlte/bootstrap/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"> --}}
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> --}}
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ url('adminlte/dist/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -53,18 +53,20 @@
                       
                   </div>
                   <div class="col-lg-3 col-md-3">
-                    <h4>Most Viewed</h4>
-                      <ul>
-                        <li>1. test try system lorem lorem </li>
-                        <li>2. lorem ipsum test pre lectro ipsum</li>
-                        <li>3. electronic testing system</li>
-                        <li>4. no ideas system nice ipsm dummy lorem test</li>
-                        <li>5. electronic testing system</li>
-                        <li>7. electronic testing system lorem lore</li>
-                        <li>8. electronic testing system</li>
-                        <li>9. electronic testing system</li>
-                        <li>10. electronic testing system</li>
-                      </ul>
+                    <h4>Top Tags</h4>
+                      <ol>
+                          <li><a href="#"> Arduino</a></li>
+                          <li><a href="#"> Web</a></li>
+                          <li><a href="#"> Management</a></li>
+                          <li><a href="#"> SQL</a></li>
+                          <li><a href="#"> Visual Studio</a></li>
+                          <li><a href="#"> Windows Form</a></li>
+                          <li><a href="#"> C#</a></li>
+                          <li><a href="#"> Java</a></li>
+                          <li><a href="#"> Game Dev</a></li>
+                          <li><a href="#"> Networking</a></li>
+                      </ol>
+                                
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

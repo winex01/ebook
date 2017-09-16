@@ -11,9 +11,9 @@
         <div class="col-lg-3 col-md-3">
               <img class="img-responsive img-thumbnail" src="{{ url('uploads/pages/sample1.jpg') }}">
               <div align="center">
-                <span class="label label-success" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 012</span>
+                <span class="label label-primary" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 012</span>
+                <span class="label label-success" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 024</span>
                 <span class="label label-danger" data-toggle="tooltip" title="Download"><i class="fa fa-cloud-download"></i> 004</span>
-                <span class="label label-warning" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 024</span>
               </div>
         </div>
         <div class="col-lg-9 col-md-9">
@@ -29,8 +29,16 @@
           </p>
 
           <p>
-            <a href="#" class="btn btn-primary btn-xs">Read more
+            <a href="#" class="btn btn-primary btn-xs">View Book
             <i class="fa fa-chevron-right"></i>
+            </a>
+
+            <a href="#" class="btn btn-success btn-xs">Bookmark
+            <i class="fa fa-bookmark-o"></i>
+            </a>
+
+            <a href="#" class="btn btn-danger btn-xs">Download
+            <i class="fa fa-cloud-download"></i>
             </a>
           </p>
 
@@ -54,9 +62,9 @@
         <div class="col-lg-3 col-md-3">
               <img class="img-responsive img-thumbnail" src="{{ url('uploads/pages/sample1-2.jpg') }}">
               <div align="center">
-                <span class="label label-success" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 022</span>
+                <span class="label label-primary" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 022</span>
+                <span class="label label-success" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 044</span>
                 <span class="label label-danger" data-toggle="tooltip" title="Download"><i class="fa fa-cloud-download"></i> 014</span>
-                <span class="label label-warning" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 044</span>
               </div>
           </div>
         <div class="col-lg-9 col-md-9">
@@ -72,8 +80,16 @@
           </p>
 
           <p>
-            <a href="#" class="btn btn-primary btn-xs">Read more
+            <a href="#" class="btn btn-primary btn-xs">View Book
             <i class="fa fa-chevron-right"></i>
+            </a>
+
+            <a href="#" class="btn btn-success btn-xs">Bookmark
+            <i class="fa fa-bookmark-o"></i>
+            </a>
+
+            <a href="#" class="btn btn-danger btn-xs">Download
+            <i class="fa fa-cloud-download"></i>
             </a>
           </p>
 
@@ -95,9 +111,9 @@
         <div class="col-lg-3 col-md-3">
               <img class="img-responsive img-thumbnail" src="{{ url('uploads/pages/sample1.jpg') }}">
               <div align="center">
-                <span class="label label-success" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 02</span>
+                <span class="label label-primary" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 02</span>
+                <span class="label label-success" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 019</span>
                 <span class="label label-danger" data-toggle="tooltip" title="Download"><i class="fa fa-cloud-download"></i> 010</span>
-                <span class="label label-warning" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 019</span>
               </div>
           </div>
         <div class="col-lg-9 col-md-9">
@@ -113,8 +129,16 @@
           </p>
 
           <p>
-            <a href="#" class="btn btn-primary btn-xs">Read more
+            <a href="#" class="btn btn-primary btn-xs">View Book
             <i class="fa fa-chevron-right"></i>
+            </a>
+
+            <a href="#" class="btn btn-success btn-xs">Bookmark
+            <i class="fa fa-bookmark-o"></i>
+            </a>
+
+            <a href="#" class="btn btn-danger btn-xs">Download
+            <i class="fa fa-cloud-download"></i>
             </a>
           </p>
 
@@ -134,9 +158,9 @@
         <div class="col-lg-3 col-md-3">
             <img class="img-responsive img-thumbnail" src="{{ url('uploads/pages/sample1.jpg') }}">
             <div align="center">
-                <span class="label label-success" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 152</span>
+                <span class="label label-primary" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 152</span>
+                <span class="label label-success" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 087</span>
                 <span class="label label-danger" data-toggle="tooltip" title="Download"><i class="fa fa-cloud-download"></i> 092</span>
-                <span class="label label-warning" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 087</span>
             </div>
         </div>
         <div class="col-lg-9 col-md-9">
@@ -152,8 +176,16 @@
           </p>
 
           <p>
-            <a href="#" class="btn btn-primary btn-xs">Read more
+            <a href="#" class="btn btn-primary btn-xs">View Book
             <i class="fa fa-chevron-right"></i>
+            </a>
+
+            <a href="#" class="btn btn-success btn-xs">Bookmark
+            <i class="fa fa-bookmark-o"></i>
+            </a>
+
+            <a href="#" class="btn btn-danger btn-xs">Download
+            <i class="fa fa-cloud-download"></i>
             </a>
           </p>
 
@@ -170,9 +202,9 @@
         <div class="col-lg-3 col-md-3">
             <img class="img-responsive img-thumbnail" src="{{ url('uploads/pages/sample1-4.jpg') }}">
             <div align="center">
-                <span class="label label-success" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 059</span>
+                <span class="label label-primary" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 059</span>
+                <span class="label label-success" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 039</span>
                 <span class="label label-danger" data-toggle="tooltip" title="Download"><i class="fa fa-cloud-download"></i> 043</span>
-                <span class="label label-warning" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 039</span>
             </div>
         </div>
         <div class="col-lg-9 col-md-9">
@@ -188,8 +220,16 @@
           </p>
 
           <p>
-            <a href="#" class="btn btn-primary btn-xs">Read more
+            <a href="#" class="btn btn-primary btn-xs">View Book
             <i class="fa fa-chevron-right"></i>
+            </a>
+
+            <a href="#" class="btn btn-success btn-xs">Bookmark
+            <i class="fa fa-bookmark-o"></i>
+            </a>
+
+            <a href="#" class="btn btn-danger btn-xs">Download
+            <i class="fa fa-cloud-download"></i>
             </a>
           </p>
 

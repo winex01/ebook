@@ -10,4 +10,14 @@ class PagesController extends Controller
     {
     	return view('index');
     }
+
+    public function bookList()
+    {
+    	return view('book-list');
+    }
+
+    public function students()
+    {
+    	return view('students');
+    }
 }

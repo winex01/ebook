@@ -1,17 +1,21 @@
  <?php
 
-
+Auth::routes();
 
 
 #pages controller front/welcome
 Route::get('/', 'PagesController@index')->name('index');
+Route::get('/book-list', 'PagesController@bookList')->name('book.list');
+Route::get('/students', 'PagesController@students')->name('students');
 
-Auth::routes();
+
 
 #user route
 Route::get('/home', 'HomeController@index')->name('home');
 	#auth dir
 	Route::get('user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
+
+
 
 #admin routes
 Route::prefix('admin')->group(function() {

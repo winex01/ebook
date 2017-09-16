@@ -5,8 +5,9 @@ Auth::routes();
 
 #pages controller front/welcome
 Route::get('/', 'PagesController@index')->name('index');
-Route::get('/book-list', 'PagesController@bookList')->name('book.list');
+Route::get('/book-lists', 'PagesController@bookLists')->name('book.lists');
 Route::get('/students', 'PagesController@students')->name('students');
+Route::get('/committees', 'PagesController@committees')->name('committees');
 
 
 

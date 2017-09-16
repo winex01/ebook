@@ -11,13 +11,18 @@ class PagesController extends Controller
     	return view('index');
     }
 
-    public function bookList()
+    public function bookLists()
     {
-    	return view('book-list');
+    	return view('book-lists');
     }
 
     public function students()
     {
-    	return view('students');
+        return view('students');
+    }
+
+    public function committees()
+    {
+    	return view('committees');
     }
 }

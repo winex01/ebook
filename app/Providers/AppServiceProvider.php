@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Blade::directive('active', function ($expression) {
+            list($pattern, $class) = explode(',', str_replace(['(',')', ' ', "'"], '', $expression));
+            return "<?= request()->is('$pattern') ? '$class' : ''; ?>";
+        });
     }
 
     /**

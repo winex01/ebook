@@ -2,7 +2,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="admintlte/index2.html" class="navbar-brand"><b>E</b>-Book Archives</a>
+          <a href="{{ route('index') }}" class="navbar-brand"><b>E</b>-Book Archives</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -12,24 +12,31 @@
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
             
-            <li class="active">
-              <a href="{{ url('index') }}">
+            <li class="@active('/', 'active')">
+              <a href="{{ route('index') }}">
                 <i class="fa fa-home"></i>
                 Home
               </a>
             </li>
             
-            <li>
-              <a href="#">
+            <li class="@active('book-lists', 'active')">
+              <a href="{{ route('book.lists') }}">
                 <i class="fa fa-list"></i>
                 Book List
               </a>
             </li>
 
-            <li>
-              <a href="#">
+            <li class="@active('students', 'active')">
+              <a href="{{ route('students') }}">
                 <i class="fa fa-users"></i>
                 Student's
+              </a>
+            </li>
+
+            <li class="@active('committees', 'active')">
+              <a href="{{ route('committees') }}">
+                <i class="fa fa-users"></i>
+                Committee's
               </a>
             </li>
             
@@ -46,15 +53,15 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             
-            <li>
-                <a href="#">
+            <li class="@active('login', 'active')">
+                <a href="{{ url('login') }}">
                   <i class="fa fa-sign-in"></i>
                   Signin 
                 </a>
             </li>
             
-            <li>
-                <a href="#">
+            <li class="@active('register', 'active')">
+                <a href="{{ url('register') }}">
                   <i class="fa fa-user"></i>
                   Signup 
                 </a>

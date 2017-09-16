@@ -2,7 +2,8 @@
 
 
 @section('content')
-@include('layouts.search-bar')
+
+  @include('layouts.search-bar')
 
   {{-- content --}}
   <hr />

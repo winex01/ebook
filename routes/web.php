@@ -10,7 +10,7 @@ Route::get('/book-lists', 'PagesController@bookLists')->name('book.lists');
 
 
 #user route
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'UserController@index')->name('home');
 	#auth dir
 	Route::get('user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 

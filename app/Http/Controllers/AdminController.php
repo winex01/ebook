@@ -26,5 +26,9 @@ class AdminController extends Controller
         return view('admin.admin-dashboard');
     }
 
+    public function books()
+    {
+        return view('admin.books');
+    }
     
 }

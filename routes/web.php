@@ -23,6 +23,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 	
 	Route::get('/', 'AdminController@index')->name('admin.dashboard');
+	Route::get('/books', 'AdminController@books')->name('admin.books');
 	
 
 });

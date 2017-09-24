@@ -2,18 +2,8 @@
 
 
 @section('content')
-	    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Blank page Test
-        <small>it all starts here</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
-      </ol>
-    </section>
+
+  @include('layouts.version')
 
     <!-- Main content -->
     <section class="content">
@@ -54,14 +44,42 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Modal title</h4>
+            <h4 class="modal-title" id="modal-btitle">Modal title</h4>
           </div>
           <div class="modal-body">
-            
+              {{-- form --}}
+              <form class="form-horizontal">
+                {{-- title --}}
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="title">Title:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="title" placeholder="Book Title">
+                  </div>
+                </div>
+                {{-- description --}}
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="description">Description:</label>
+                  <div class="col-sm-10"> 
+                      <textarea class="form-control" rows="10" id="description" placeholder="Enter Book Description."></textarea>
+                  </div>
+                </div>
+                {{-- file --}}
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="file">File:</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" id="file" placeholder="File">
+                  </div>
+                </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                  <i class="fa fa-close"></i>
+                </button>
+                <button id="save-book" type="button" class="btn btn-primary">Save changes
+                  <i class="fa fa-check"></i>
+                </button>
+              </form>
+              {{-- / form --}}
           </div>
         </div>
       </div>
@@ -73,7 +91,77 @@
 @section('script')
 <script type="text/javascript">
 
-  // $('#add-book')
+  $('#add-book').click(function(event) {
+    /* Act on the event */
+      $('#modal-btitle').text('Add New Book');
+
+  });
+
+
+  $('#save-book').click(function(event) {
+    /* Act on the event */
+  
+      var validate = '';
+      var title = $('input[id=title]');
+      var desc = $('textarea[id=description]');
+      var file = $('input[id=file]');
+
+
+      // validate title
+      if (title.val() == '') {
+          title.parent().parent().removeClass('has-success');
+          title.parent().parent().addClass('has-error');
+      }else {
+          title.parent().parent().removeClass('has-error');
+          title.parent().parent().addClass('has-success');
+          validate += '1';
+      }
+
+      //validate desc
+      if (desc.val() == '') {
+          desc.parent().parent().removeClass('has-success');
+          desc.parent().parent().addClass('has-error');
+      }else {
+          desc.parent().parent().removeClass('has-error');
+          desc.parent().parent().addClass('has-success');
+          validate += '2';
+      }
+
+      //validate if file is empty or not
+      if (file.val() == '') {
+          file.parent().parent().removeClass('has-success');
+          file.parent().parent().addClass('has-error');
+      }else {
+          file.parent().parent().removeClass('has-error');
+          file.parent().parent().addClass('has-success');
+          validate += '3';
+      }
+
+      //validated
+      if (validate == '123') {
+        // $('#modal-book').modal('hide');//temp
+          $.ajax({
+            url: '/path/to/file',
+            type: 'POST',
+            dataType: 'xml/html/script/json/jsonp',
+            data: {param1: 'value1'},
+            complete: function(xhr, textStatus) {
+              //called when complete
+            },
+            success: function(data, textStatus, xhr) {
+              //called when successful
+            },
+            error: function(xhr, textStatus, errorThrown) {
+              //called when there is an error
+            }
+          });
+        
+      }
+
+  });
+
+
+
 
 </script>
 @endsection

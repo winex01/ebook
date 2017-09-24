@@ -8,13 +8,8 @@
   <!-- Full Width Column -->
   <div class="content-wrapper">
     <div class="container">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          Electronic Book Archive
-          <small>Version 1.0</small>
-        </h1>
-      </section>
+
+      @include('layouts.version')
 
       <!-- Main content -->
       <section class="content">

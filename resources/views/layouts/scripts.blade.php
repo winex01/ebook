@@ -2,6 +2,16 @@
 <script src="{{ url('adminlte/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{ url('adminlte/bootstrap/js/bootstrap.min.js') }}"></script>
+
+
+{{-- <script src="https://datatables.yajrabox.com/js/jquery.dataTables.min.js"></script> --}}
+
+<script src="{{ url('datatables/js/jQuery.dataTables.min.js') }}"></script>
+
+{{-- <script src="https://datatables.yajrabox.com/js/datatables.bootstrap.js"></script> --}}
+<script src="{{ url('datatables/js/datatables.bootstrap.js') }}"></script>
+
+
 <!-- SlimScroll -->
 <script src="{{ url('adminlte/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 <!-- FastClick -->

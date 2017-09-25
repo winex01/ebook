@@ -26,6 +26,21 @@
               <i class="fa fa-plus-circle"></i> New
             </a>
 
+
+            <table id="book-table" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Uploaded</th>
+                  <th><center>Action</center></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                </tbody>
+            </table>
+
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
@@ -90,6 +105,22 @@
 {{-- script --}}
 @section('script')
 <script type="text/javascript">
+
+  // tables
+   $(function() {
+        $('#book-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '/admin/getbooks',
+            columns: [
+                {data: 'id'},
+                {data: 'title'},
+                {data: 'created_at'},
+                {data: 'action'},
+            ]
+        });
+    });
+
 
   $('#add-book').click(function(event) {
     /* Act on the event */

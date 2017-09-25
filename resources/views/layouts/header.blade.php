@@ -12,6 +12,10 @@
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="{{ url('adminlte/bootstrap/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
+
+  {{-- datatables --}}
+  <link rel="stylesheet" href="{{ url('datatables/css/datatables.bootstrap.css') }}">
+
   <link rel="stylesheet" href="{{ url('adminlte/font-awesome/css/font-awesome.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{ url('adminlte/Ionicons/css/ionicons.min.css') }}">

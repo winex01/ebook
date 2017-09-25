@@ -25,7 +25,6 @@ $factory->define(App\Book::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
         'description' => $paragraph,
-        'pdf' => 'test',
         'cover' => $covers[$cover[0]]
     ];
 });

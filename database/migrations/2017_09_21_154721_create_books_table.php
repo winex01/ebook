@@ -17,7 +17,6 @@ class CreateBooksTable extends Migration
             $table->increments('id');
             $table->string('title', 150);
             $table->text('description');
-            $table->integer('views')->default(0);
             $table->string('cover');//temporary
             $table->timestamps();
 

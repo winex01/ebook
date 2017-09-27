@@ -34,7 +34,7 @@
             </a>
 
 
-            <table id="book-table" class="table table-bordered table-hover">
+            <table id="table-book" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -44,7 +44,7 @@
                 </tr>
                 </thead>
 
-                <tbody id="book-list">
+                <tbody>
                 </tbody>
             </table>
 
@@ -115,9 +115,24 @@
 
   var url = '/admin/book/';
 
-  // display tables
+  // csrf
+  $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+  })
+
+  function dataTableRefresh(tble){
+    // add new row dummy data just to complete the number of colum
+    // just to refresh the table
+    var newRow = '<tr><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td></tr>';
+    $(tble).DataTable().row.add($(newRow)).draw();
+  }
+
+
+  // display book tables
    $(function() {
-        $('#book-table').DataTable({
+        $('#table-book').DataTable({
             processing: true,
             serverSide: true,
             ajax: url + 'all',
@@ -131,27 +146,21 @@
     });
 
 
-   //open new/add modal
+   //open new/add book modal
   $('#add-book').click(function(event) {
     /* Act on the event */
       $('#title').focus();
       $('#modal-btitle').text('Add New Book');
   });
-  // erase modal inputs in new book modal
+  // erase book modal inputs 
   $('#modal-book').on('hidden.bs.modal', function () {
       $(this).find('form').trigger('reset');
   })
 
-
+  // form book
   $('#form-book').submit(function(event) {
     /* Act on the event */
     event.preventDefault(); 
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-        }
-    })
 
       var title = $('input[id=title]');
       var desc = $('textarea[id=description]');
@@ -180,17 +189,12 @@
             data: formData,
             dataType: 'json',
             success: function (data) {
+
                 console.log(data);
 
-                $('#modal-book').modal('hide');
+                dataTableRefresh('#table-book');
 
-                if (state == 'add') {
-                    // add new row dummy data just to complete the number of colum
-                    // just to refresh the table
-                    var newRow = '<tr><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td></tr>';
-                    $('#book-table').DataTable().row.add($(newRow)).draw();                
-                    
-                }
+                $('#modal-book').modal('hide');
 
             },
             error: function (data) {
@@ -202,7 +206,26 @@
   });
 
 
+  // delete book
+  function deleteBook(id) {
+
+      $.ajax({
+
+          type: "DELETE",
+          url: url + 'delete/' + id,
+          success: function (data) {
+              console.log(data);
+
+              dataTableRefresh('#table-book');
+          },
+          error: function (data) {
+              console.log('Error:', data);
+          }
+
+      });
+  }
 
 
 </script>
 @endsection
+

@@ -23,9 +23,11 @@ Route::prefix('admin')->group(function() {
 	Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 	
 	Route::get('/', 'AdminController@index')->name('admin.dashboard');
+	
 	Route::get('/books', 'AdminController@books')->name('admin.books');
 	Route::get('/book/all', 'BookController@all');	
 	Route::post('/book/store', 'BookController@store');	
+	Route::delete('/book/delete/{book}', 'BookController@delete');
 
 });
 

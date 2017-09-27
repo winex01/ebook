@@ -19,10 +19,10 @@ class BookController extends Controller
 
         return DataTables::of($books)->addColumn('action', function ($book) {
                 return '
-                	<div class="col-lg-offset-3 col-md-offset-3">
-                		<button value="'.$book->id.'" class="btn btn-xs btn-info"><i class="fa fa-info"></i> Info</button>
-                		<button value="'.$book->id.'" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
-                		<button value="'.$book->id.'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                	<div align="center">
+                		<button class="btn btn-xs btn-info"><i class="fa fa-info"></i> Info</button>
+                		<button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
+                		<button onclick="deleteBook('.$book->id.')" class="btn btn-xs btn-danger delete-book"><i class="fa fa-trash"></i> Delete</button>
                 	</div>
                 ';
             })->make(true);
@@ -47,8 +47,17 @@ class BookController extends Controller
             'description' => $request->description,
         ]);
 
-        return json_encode($book);
+        return json_encode($book->id);
     }
 
+    /**
+     * remove book
+     *
+     * @return void
+     */
+    public function delete(Book $book)
+    {
+        Book::destroy($book->id);
+    }
 
 }

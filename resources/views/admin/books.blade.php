@@ -22,6 +22,13 @@
         </div>
         <div class="box-body">
 
+          {{-- flash message here and error --}}
+          {{-- <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <h4><i class="icon fa fa-check"></i> Success!</h4>
+              Added New Book Successfully.
+          </div> --}}
+
             <a id="add-book" class="btn btn-default" data-toggle="modal" href='#modal-book'>
               <i class="fa fa-plus-circle"></i> New
             </a>
@@ -37,7 +44,7 @@
                 </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="book-list">
                 </tbody>
             </table>
 
@@ -63,12 +70,12 @@
           </div>
           <div class="modal-body">
               {{-- form --}}
-              <form class="form-horizontal">
+              <form  id="form-book" class="form-horizontal">
                 {{-- title --}}
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="title">Title:</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="title" placeholder="Book Title">
+                    <input type="text" class="form-control" id="title" placeholder="Book Title" autofocus>
                   </div>
                 </div>
                 {{-- description --}}
@@ -79,18 +86,18 @@
                   </div>
                 </div>
                 {{-- file --}}
-                <div class="form-group">
+                {{-- <div class="form-group">
                   <label class="control-label col-sm-2" for="file">File:</label>
                   <div class="col-sm-10">
                     <input type="file" class="form-control" id="file" placeholder="File">
                   </div>
-                </div>
+                </div> --}}
           </div>
           <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close
                   <i class="fa fa-close"></i>
                 </button>
-                <button id="save-book" type="button" class="btn btn-primary">Save changes
+                <button type="submit" id="save-book" value="add" type="button" class="btn btn-primary">Save changes
                   <i class="fa fa-check"></i>
                 </button>
               </form>
@@ -106,12 +113,14 @@
 @section('script')
 <script type="text/javascript">
 
-  // tables
+  var url = '/admin/book/';
+
+  // display tables
    $(function() {
         $('#book-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '/admin/getbooks',
+            ajax: url + 'all',
             columns: [
                 {data: 'id'},
                 {data: 'title'},
@@ -122,72 +131,73 @@
     });
 
 
+   //open new/add modal
   $('#add-book').click(function(event) {
     /* Act on the event */
+      $('#title').focus();
       $('#modal-btitle').text('Add New Book');
-
   });
+  // erase modal inputs in new book modal
+  $('#modal-book').on('hidden.bs.modal', function () {
+      $(this).find('form').trigger('reset');
+  })
 
 
-  $('#save-book').click(function(event) {
+  $('#form-book').submit(function(event) {
     /* Act on the event */
-  
-      var validate = '';
+    event.preventDefault(); 
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    })
+
       var title = $('input[id=title]');
       var desc = $('textarea[id=description]');
       var file = $('input[id=file]');
+      
+      var type = 'POST';
+      var toUrl = url;
+      var state = $('#save-book').val();
 
 
-      // validate title
-      if (title.val() == '') {
-          title.parent().parent().removeClass('has-success');
-          title.parent().parent().addClass('has-error');
-      }else {
-          title.parent().parent().removeClass('has-error');
-          title.parent().parent().addClass('has-success');
-          validate += '1';
+      var formData = {
+          title : title.val(),
+          description : desc.val(),
       }
 
-      //validate desc
-      if (desc.val() == '') {
-          desc.parent().parent().removeClass('has-success');
-          desc.parent().parent().addClass('has-error');
-      }else {
-          desc.parent().parent().removeClass('has-error');
-          desc.parent().parent().addClass('has-success');
-          validate += '2';
+
+      if (state == 'add') {
+        toUrl += 'store'; 
       }
 
-      //validate if file is empty or not
-      if (file.val() == '') {
-          file.parent().parent().removeClass('has-success');
-          file.parent().parent().addClass('has-error');
-      }else {
-          file.parent().parent().removeClass('has-error');
-          file.parent().parent().addClass('has-success');
-          validate += '3';
-      }
+      // new
+      //TODO append new inserted or last inserted to row
+       $.ajax({
+            type: type,
+            url: toUrl,
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
 
-      //validated
-      if (validate == '123') {
-        // $('#modal-book').modal('hide');//temp
-          $.ajax({
-            url: '/path/to/file',
-            type: 'POST',
-            dataType: 'xml/html/script/json/jsonp',
-            data: {param1: 'value1'},
-            complete: function(xhr, textStatus) {
-              //called when complete
+                $('#modal-book').modal('hide');
+
+                if (state == 'add') {
+                    // add new row dummy data just to complete the number of colum
+                    // just to refresh the table
+                    var newRow = '<tr><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td></tr>';
+                    $('#book-table').DataTable().row.add($(newRow)).draw();                
+                    
+                }
+
             },
-            success: function(data, textStatus, xhr) {
-              //called when successful
-            },
-            error: function(xhr, textStatus, errorThrown) {
-              //called when there is an error
+            error: function (data) {
+                console.log('Error: ' + data);
             }
-          });
-        
-      }
+        });
+      
 
   });
 

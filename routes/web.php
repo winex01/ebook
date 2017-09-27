@@ -24,7 +24,8 @@ Route::prefix('admin')->group(function() {
 	
 	Route::get('/', 'AdminController@index')->name('admin.dashboard');
 	Route::get('/books', 'AdminController@books')->name('admin.books');
-	Route::get('/getbooks', 'BookController@getBooks');	
+	Route::get('/book/all', 'BookController@all');	
+	Route::post('/book/store', 'BookController@store');	
 
 });
 

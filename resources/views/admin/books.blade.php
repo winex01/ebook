@@ -107,6 +107,9 @@
       </div>
     </div>
 
+
+    @include('partials.confirm-delete')
+
 @endsection
 
 {{-- script --}}
@@ -114,6 +117,7 @@
 <script type="text/javascript">
 
   var url = '/admin/book/';
+  var id;
 
   // csrf
   $.ajaxSetup({
@@ -207,23 +211,36 @@
 
 
   // delete book
-  function deleteBook(id) {
+  function deleteBook(book_id, book_title) {
+      $('#modal-confirm-delete .modal-title').html('System Message');
+      $('#modal-confirm-delete .modal-body p').html('Are you sure you want to delete <strong>' + book_title + '</strong>?');
+      $('#modal-confirm-delete').modal();
 
-      $.ajax({
-
-          type: "DELETE",
-          url: url + 'delete/' + id,
-          success: function (data) {
-              console.log(data);
-
-              dataTableRefresh('#table-book');
-          },
-          error: function (data) {
-              console.log('Error:', data);
-          }
-
-      });
+      id = book_id;
   }
+
+  $('#btn-confirm-delete').click(function(event) {
+        /* Act on the event */
+        $.ajax({
+
+            type: "DELETE",
+            url: url + 'delete/' + id,
+            success: function (data) {
+                
+                console.log(data);
+
+                $('#modal-confirm-delete').modal('hide');
+                dataTableRefresh('#table-book');
+
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+
+        });
+
+  });
+  // end delete book
 
 
 </script>

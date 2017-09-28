@@ -16,13 +16,12 @@ class BookController extends Controller
     public function all()
     {
         $books = Book::select(['id', 'title', 'created_at']);
-
         return DataTables::of($books)->addColumn('action', function ($book) {
                 return '
                 	<div align="center">
                 		<button class="btn btn-xs btn-info"><i class="fa fa-info"></i> Info</button>
                 		<button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
-                		<button onclick="deleteBook('.$book->id.')" class="btn btn-xs btn-danger delete-book"><i class="fa fa-trash"></i> Delete</button>
+                		<button onclick="deleteBook('.$book->id.', \'' .$book->title. '\')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
                 	</div>
                 ';
             })->make(true);
@@ -59,5 +58,7 @@ class BookController extends Controller
     {
         Book::destroy($book->id);
     }
+
+
 
 }

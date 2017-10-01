@@ -28,15 +28,15 @@ function printErrorMsg (msg) {
 // ------------------------------------------------------------------------------
 // flash success
 $('#flash-success').hide();
+$('#flash-success').removeClass('hidden');//see partials flash success
 $('#flash-success-x').click(function(event) {
     /* Act on the event */
-    alert('fuck');
     $('#flash-success').fadeOut('slow');
 });
 function printSuccessMsg(msg, type){
     $('#flash-success-body').text(msg + ' is ' + type + ' Successfully.');
     $('#flash-success').show();
-    $("#flash-success").fadeTo(1500, 500).slideUp(500, function(){
+    $("#flash-success").fadeTo(4000, 500).slideUp(500, function(){
         $("#flash-success").slideUp(500);
     });
 }

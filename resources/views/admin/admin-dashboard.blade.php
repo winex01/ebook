@@ -4,7 +4,7 @@
 @section('content')
 
   @include('layouts.version')
-
+      
     <!-- Main content -->
     <section class="content">
 

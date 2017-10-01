@@ -5,6 +5,7 @@
 <!-- Bootstrap 3.3.6 -->
 <script src="{{ url('adminlte/bootstrap/js/bootstrap.min.js') }}"></script>
 
+<script src="{{ url('js/custom.js') }}"></script>
 
 {{-- <script src="https://datatables.yajrabox.com/js/jquery.dataTables.min.js"></script> --}}
 
@@ -21,6 +22,5 @@
 <!-- AdminLTE App -->
 <script src="{{ url('adminlte/dist/js/app.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ url('adminlte/dist/js/demo.js') }}"></script>
+{{-- <script src="{{ url('adminlte/dist/js/demo.js') }}"></script> --}}
 
-<script src="{{ url('js/custom.js') }}"></script>

@@ -7,8 +7,17 @@ use App\Book;
 use DataTables;
 use Validator;
 
-class BookController extends Controller
+class AdminBookController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     /**
      * get all books using datatables library
      *
@@ -16,11 +25,11 @@ class BookController extends Controller
      */
     public function all()
     {
-        $books = Book::select(['id', 'title', 'created_at']);
+        $books = Book::select(['id', 'title', 'created_at' , 'slug']);
         return DataTables::of($books)->addColumn('action', function ($book) {
                 return '
                 	<div align="center">
-                		<button class="btn btn-xs btn-info"><i class="fa fa-info"></i> View</button>
+                		<a href="book/show/'.$book->slug.'" class="btn btn-xs btn-info"><i class="fa fa-search"></i> Select</a>
                 		<button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
                 		<button onclick="deleteBook('.$book->id.', \'' .$book->title. '\')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
                 	</div>
@@ -81,6 +90,13 @@ class BookController extends Controller
         Book::destroy($book->id);
 
         return response()->json(['title' => $deleted]);
+    }
+
+    public function show($slug)
+    {
+        $book = Book::where('slug', $slug)->first()->toArray();
+        
+        return view('admin.book-show', ['book' => $book]);
     }
 
 

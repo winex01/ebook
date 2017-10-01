@@ -23,12 +23,14 @@ Route::prefix('admin')->group(function() {
 	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 	Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 	
-	Route::get('/', 'AdminController@index')->name('admin.dashboard');
+	Route::get('/', 'AdminPagesController@index')->name('admin.dashboard');
+	Route::get('/books', 'AdminPagesController@books')->name('admin.books');
 	
-	Route::get('/books', 'AdminController@books')->name('admin.books');
-	Route::get('/book/all', 'BookController@all');	
-	Route::post('/book/store', 'BookController@store')->name('book.store');	
-	Route::delete('/book/delete/{book}', 'BookController@delete');
+	// book modules
+	Route::get('/book/show/{slug}', 'AdminBookController@show');
+	Route::delete('/book/delete/{book}', 'AdminBookController@delete');
+	Route::post('/book/store', 'AdminBookController@store')->name('book.store');	
+	Route::get('/book/all', 'AdminBookController@all');	
 
 });
 

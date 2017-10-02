@@ -76,7 +76,7 @@
               @include('partials.flash-error')
 
               {{-- form --}}
-              <form class="form-horizontal" id="book-form" enctype="multipart/form-data">
+              <form class="form-horizontal" id="book-form">
                 {{-- title --}}
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="title">Title:</label>

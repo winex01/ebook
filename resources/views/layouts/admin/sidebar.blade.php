@@ -38,7 +38,7 @@
         </li> --}}
 
 
-        <li class="treeview @active('admin/books', 'active')">
+        <li class="treeview @active('admin/books', 'active') @active('admin/book/show/*', 'active')">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Manage Books</span>
             <span class="pull-right-container">

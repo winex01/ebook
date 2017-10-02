@@ -67,7 +67,7 @@ class AdminBookController extends Controller
             'description' => $request->description
         ]);
 
-        return response()->json($book);
+        // return response()->json($book);
 
 
         // $uploadPath = 'uploads/pdf';
@@ -96,7 +96,7 @@ class AdminBookController extends Controller
     {
         $book = Book::where('slug', $slug)->first()->toArray();
         
-        return view('admin.book-show', ['book' => $book]);
+        return view('admin.book-show', compact('book'));
     }
 
 

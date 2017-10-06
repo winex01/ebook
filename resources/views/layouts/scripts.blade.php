@@ -22,3 +22,5 @@
 <script src="{{ url('adminlte/dist/js/app.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url('adminlte/dist/js/demo.js') }}"></script>
+
+<script src="{{ url('js/custom.js') }}"></script>

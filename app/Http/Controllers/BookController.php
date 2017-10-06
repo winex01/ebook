@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Book;
 use DataTables;
+use Validator;
 
 class BookController extends Controller
 {
@@ -19,7 +20,7 @@ class BookController extends Controller
         return DataTables::of($books)->addColumn('action', function ($book) {
                 return '
                 	<div align="center">
-                		<button class="btn btn-xs btn-info"><i class="fa fa-info"></i> Info</button>
+                		<button class="btn btn-xs btn-info"><i class="fa fa-info"></i> View</button>
                 		<button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
                 		<button onclick="deleteBook('.$book->id.', \'' .$book->title. '\')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
                 	</div>
@@ -34,19 +35,39 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+       
+        $validator = Validator::make($request->all(), [
+            'title'       => 'required',
+            'description' => 'required'
         ]);
 
-        //store new book
+        // if validation fails
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()->all()]);
+        }
+
+        // check if slug exist if it does incre at end
+        $slug = str_slug($request->title);
+        $count = Book::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+        $slug = $count ? "{$slug}-{$count}" : $slug;
+
+        // save new book
         $book = Book::create([
-            'title' => $request->title,
-            'description' => $request->description,
+            'title'       => title_case($request->title),
+            'slug'        => $slug,
+            'description' => $request->description
         ]);
 
-        return json_encode($book->id);
+        return response()->json($book);
+
+
+        // $uploadPath = 'uploads/pdf';
+        // $fileName = time().uniqid().'.'; 
+        // $fileExtension = $request->file->getClientOriginalExtension();
+        // // store uploaded files in upload/pdf
+        // $request->file->move(public_path($uploadPath), $fileName.$fileExtension);
+
+
     }
 
     /**
@@ -56,7 +77,10 @@ class BookController extends Controller
      */
     public function delete(Book $book)
     {
+        $deleted = $book->title;
         Book::destroy($book->id);
+
+        return response()->json(['title' => $deleted]);
     }
 
 

@@ -22,12 +22,8 @@
         </div>
         <div class="box-body">
 
-          {{-- flash message here and error --}}
-          {{-- <div class="alert alert-success alert-dismissible">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <h4><i class="icon fa fa-check"></i> Success!</h4>
-              Added New Book Successfully.
-          </div> --}}
+          {{-- flash message here --}}
+          @include('partials.flash-success')
 
             <a id="add-book" class="btn btn-default" data-toggle="modal" href='#modal-book'>
               <i class="fa fa-plus-circle"></i> New
@@ -69,8 +65,11 @@
             <h4 class="modal-title" id="modal-btitle">Modal title</h4>
           </div>
           <div class="modal-body">
+              {{-- flash message --}}
+              @include('partials.flash-error')
+
               {{-- form --}}
-              <form  id="form-book" class="form-horizontal">
+              <form class="form-horizontal" id="book-form" enctype="multipart/form-data">
                 {{-- title --}}
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="title">Title:</label>
@@ -85,13 +84,6 @@
                       <textarea class="form-control" rows="10" id="description" placeholder="Enter Book Description."></textarea>
                   </div>
                 </div>
-                {{-- file --}}
-                {{-- <div class="form-group">
-                  <label class="control-label col-sm-2" for="file">File:</label>
-                  <div class="col-sm-10">
-                    <input type="file" class="form-control" id="file" placeholder="File">
-                  </div>
-                </div> --}}
           </div>
           <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close
@@ -119,21 +111,6 @@
   var url = '/admin/book/';
   var id;
 
-  // csrf
-  $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-        }
-  })
-
-  function dataTableRefresh(tble){
-    // add new row dummy data just to complete the number of colum
-    // just to refresh the table
-    var newRow = '<tr><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td><td>Winnie & Reyvelyn</td></tr>';
-    $(tble).DataTable().row.add($(newRow)).draw();
-  }
-
-
   // display book tables
    $(function() {
         $('#table-book').DataTable({
@@ -149,7 +126,6 @@
         });
     });
 
-
    //open new/add book modal
   $('#add-book').click(function(event) {
     /* Act on the event */
@@ -160,55 +136,6 @@
   $('#modal-book').on('hidden.bs.modal', function () {
       $(this).find('form').trigger('reset');
   })
-
-  // form book
-  $('#form-book').submit(function(event) {
-    /* Act on the event */
-    event.preventDefault(); 
-
-      var title = $('input[id=title]');
-      var desc = $('textarea[id=description]');
-      var file = $('input[id=file]');
-      
-      var type = 'POST';
-      var toUrl = url;
-      var state = $('#save-book').val();
-
-
-      var formData = {
-          title : title.val(),
-          description : desc.val(),
-      }
-
-
-      if (state == 'add') {
-        toUrl += 'store'; 
-      }
-
-      // new
-      //TODO append new inserted or last inserted to row
-       $.ajax({
-            type: type,
-            url: toUrl,
-            data: formData,
-            dataType: 'json',
-            success: function (data) {
-
-                console.log(data);
-
-                dataTableRefresh('#table-book');
-
-                $('#modal-book').modal('hide');
-
-            },
-            error: function (data) {
-                console.log('Error: ' + data);
-            }
-        });
-      
-
-  });
-
 
   // delete book
   function deleteBook(book_id, book_title) {
@@ -231,6 +158,7 @@
 
                 $('#modal-confirm-delete').modal('hide');
                 dataTableRefresh('#table-book');
+                printSuccessMsg(data.title, 'Deleted');
 
             },
             error: function (data) {
@@ -241,6 +169,82 @@
 
   });
   // end delete book
+
+  //save
+  $('#book-form').submit(function(e) {
+    /* Act on the event */
+      e.preventDefault();
+      
+      $.ajax({
+        url: url + 'store',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          title: $('#title').val(),
+          description: $('#description').val()
+        },
+        success: function (data) {
+            console.log(data);
+
+            if (data.title) {
+              dataTableRefresh('#table-book');
+              printSuccessMsg(data.title, 'Added');
+              $('#modal-book').modal('hide');
+            }else{
+              if (data.error) {
+                printErrorMsg(data.error);
+              }
+            }
+        },
+        error: function (data) {
+            console.log('Error:', data);
+        }
+
+      });
+      
+
+  });
+
+
+  // example for uploading files 
+  // $('#book-form').submit(function(e) {
+  //   /* Act on the event */
+  //     e.preventDefault();
+
+  //     var form = new FormData();
+
+  //     form.append('title', $('#title').val());
+  //     form.append('description', $('#description').val());
+  //     form.append('file', $('#file')[0].files[0]);
+      
+  //     $.ajax({
+  //         url: url + 'store',
+  //         data: form,
+  //         cache: false,
+  //         contentType: false,
+  //         processData: false,
+  //         type: 'POST',
+  //         success:function(response) {
+  //             console.log(response);
+
+  //               if (response.error) {
+  //                 printErrorMsg(response.error);
+  //               }else {
+  //                 $('.print-error-msg').hide();
+  //                 $('#modal-book').modal('hide');
+  //                 dataTableRefresh('#table-book');
+  //                 alert('Added Successfully!');
+  //               }
+
+  //         },
+  //         error: function(response) {
+  //           console.log('Error: ' + response)
+  //         }
+  //     });
+
+  // });
+
+  
 
 
 </script>

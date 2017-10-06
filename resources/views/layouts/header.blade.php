@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  {{-- csrf --}}
   <meta name="_token" content="{!! csrf_token() !!}" />
+
   <title>E-Book Archives</title>
 
   <link rel="icon" href="{{ url('uploads/book-icon.png') }}">

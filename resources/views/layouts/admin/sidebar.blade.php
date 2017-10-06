@@ -33,9 +33,23 @@
           </a>
         </li>
 
-        <li class="@active('admin/books', 'active')">
+{{--         <li class="@active('admin/books', 'active')">
           <a href="{{ route('admin.books') }}"><i class="fa fa-book"></i> <span>Books</span></a>
+        </li> --}}
+
+
+        <li class="treeview @active('admin/books', 'active')">
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>Manage Books</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="@active('admin/books', 'active')"><a href="{{ route('admin.books') }}"><i class="fa fa-circle-o"></i> Book Lists</a></li>
+          </ul>
         </li>
+
          
         {{-- <li>
           <a href="../calendar.html">

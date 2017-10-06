@@ -6,8 +6,9 @@ Route::get('user/logout', 'Auth\LoginController@userLogout')->name('user.logout'
 
 
 #guest route
-Route::get('/', 'GuestController@index')->name('index');
+Route::get('/testing', 'TestController@index')->name('index');
 Route::get('/book-lists', 'GuestController@bookLists')->name('book.lists');
+Route::get('/', 'GuestController@index')->name('index');
 
 
 #user route
@@ -26,7 +27,7 @@ Route::prefix('admin')->group(function() {
 	
 	Route::get('/books', 'AdminController@books')->name('admin.books');
 	Route::get('/book/all', 'BookController@all');	
-	Route::post('/book/store', 'BookController@store');	
+	Route::post('/book/store', 'BookController@store')->name('book.store');	
 	Route::delete('/book/delete/{book}', 'BookController@delete');
 
 });

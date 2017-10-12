@@ -35,15 +35,15 @@
 
             {{-- button page --}}
             <a class="btn btn-default" data-toggle="modal" href='#modal-page'>
-              <i class="fa fa-plus-circle"></i> Page
+              <i class="fa fa-plus-circle"></i> Add Page
             </a>
 
 
-      {{-- <table id="table-book" class="table table-bordered table-hover">
+          <table id="table-page" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Title</th>
+                  <th>ID #</th>
+                  <th>Page</th>
                   <th>Uploaded</th>
                   <th><center>Action</center></th>
                 </tr>
@@ -51,7 +51,7 @@
 
                 <tbody>
                 </tbody>
-            </table> --}}
+            </table>
 
         </div>
         <!-- /.box-body -->
@@ -110,9 +110,30 @@
 @section('script')
 
 <script type="text/javascript">
-    var url = '/admin/page/';
+    
+  var url = '/admin/page/';
 
-    // display page tables
+  // display book tables
+   $(function() {
+       $('#table-page').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: url + 'all/' + {{ $book['id'] }},
+            columns: [
+                {data: 'id', searchable: true},
+                {data: 'page', searchable: false},
+                {data: 'created_at', searchable: false},
+                {data: 'action', searchable: false},
+            ],
+            // "fnCreatedRow": function (row, data, index) {
+            //     $('td', row).eq(0).html(index + 1);
+            // }
+        });
+
+
+
+    });
+
 
     // new page
     $('#page-form').submit(function(e) {

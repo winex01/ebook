@@ -47,7 +47,7 @@ class AdminBookController extends Controller
        
         $validator = Validator::make($request->all(), [
             'title'       => 'required',
-            'description' => 'required'
+            'description' => 'required|min:150'
         ]);
 
         // if validation fails
@@ -67,7 +67,7 @@ class AdminBookController extends Controller
             'description' => $request->description
         ]);
 
-        // return response()->json($book);
+        return response()->json($book);
 
 
         // $uploadPath = 'uploads/pdf';
@@ -94,7 +94,7 @@ class AdminBookController extends Controller
 
     public function show($slug)
     {
-        $book = Book::where('slug', $slug)->first()->toArray();
+        $book = Book::where('slug', $slug)->first();
         
         return view('admin.book-show', compact('book'));
     }

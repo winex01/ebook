@@ -33,14 +33,14 @@
           @include('partials.flash-success')
 
             <a id="add-book" class="btn btn-default" data-toggle="modal" href='#modal-book'>
-              <i class="fa fa-plus-circle"></i> New
+              <i class="fa fa-plus-circle"></i> Add Book
             </a>
 
 
             <table id="table-book" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>#</th>
                   <th>Title</th>
                   <th>Uploaded</th>
                   <th><center>Action</center></th>
@@ -129,7 +129,10 @@
                 {data: 'title'},
                 {data: 'created_at'},
                 {data: 'action'},
-            ]
+            ],
+            "fnCreatedRow": function (row, data, index) {
+                $('td', row).eq(0).html(index + 1);
+            }
         });
     });
 

@@ -2,6 +2,7 @@
 /public/hot
 /public/test
 /public/uploads/page/*
+!/public/uploads/page/.gitkeep 
 /public/storage
 /storage/*.key
 /vendor

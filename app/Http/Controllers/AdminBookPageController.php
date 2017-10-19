@@ -28,7 +28,8 @@ class AdminBookPageController extends Controller
 
         // if validation fails
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()->all()]);
+            // return response()->json(['error'=>$validator->errors()->all()]);
+            return back()->withInput();
         }
 
         // if validation success
@@ -44,7 +45,8 @@ class AdminBookPageController extends Controller
         $book = \App\Book::where('slug', $request->slug)->first();
         $book->pages()->save($page);
 
-    	return response()->json($page);
+    	// return response()->json($page);
+        return back();
     }
 
     public function all($id)

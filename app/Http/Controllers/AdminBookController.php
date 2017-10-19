@@ -98,8 +98,10 @@ class AdminBookController extends Controller
     public function show($slug)
     {
         $book = Book::where('slug', $slug)->first();
-        
-        return view('admin.book-show', compact('book'));
+
+        $pages = \App\Page::where('book_id', $book->id)->paginate(1);
+
+        return view('admin.book-show', compact('book', 'pages'));
     }
 
 

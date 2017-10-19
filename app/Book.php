@@ -12,4 +12,5 @@ class Book extends Model
 	{
 		return $this->hasMany('\App\Page');
 	}
+
 }

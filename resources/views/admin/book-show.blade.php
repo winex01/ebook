@@ -30,28 +30,32 @@
         </div>
         <div class="box-body">
 
-          {{-- flash message here --}}
-          @include('partials.flash-success')
 
             {{-- button page --}}
             <a class="btn btn-default" data-toggle="modal" href='#modal-page'>
               <i class="fa fa-plus-circle"></i> Add Page
             </a>
 
+            <br />
+            {{-- pagination --}}
+            <center>
+              {{ $pages->links() }}
+            </center>
+            {{-- / pagination --}}
 
-          <table id="table-page" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>ID #</th>
-                  <th>Page</th>
-                  <th>Uploaded</th>
-                  <th><center>Action</center></th>
-                </tr>
-                </thead>
+            <div class="container-fluid">
+              
+              @foreach($pages as $page)
+                <img src="{{ url($page->page) }}" class="img-responsive img-thumbnail" alt="Image">
+              @endforeach
 
-                <tbody>
-                </tbody>
-            </table>
+            </div>
+
+            {{-- pagination --}}
+            <center>
+              {{ $pages->links() }}
+            </center>
+            {{-- / pagination --}}
 
         </div>
         <!-- /.box-body -->
@@ -76,7 +80,8 @@
           </div>
           <div class="modal-body">
               {{-- form --}}
-              <form class="form-horizontal" id="page-form" enctype="multipart/form-data">
+              <form class="form-horizontal" action="{{ url('/admin/page/store') }}" method="POST" id="page-form" enctype="multipart/form-data">
+                 {{ csrf_field() }}
                 {{-- file --}}
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="file">File:</label>
@@ -114,61 +119,61 @@
   var url = '/admin/page/';
 
   // display book tables
-   $(function() {
-       $('#table-page').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: url + 'all/' + {{ $book['id'] }},
-            columns: [
-                {data: 'id', searchable: true},
-                {data: 'page', searchable: false},
-                {data: 'created_at', searchable: false},
-                {data: 'action', searchable: false},
-            ],
-            // "fnCreatedRow": function (row, data, index) {
-            //     $('td', row).eq(0).html(index + 1);
-            // }
-        });
+   // $(function() {
+   //     $('#table-page').DataTable({
+   //          processing: true,
+   //          serverSide: true,
+   //          ajax: url + 'all/' + {{-- $book['id'] --}},
+   //          columns: [
+   //              {data: 'id', searchable: true},
+   //              {data: 'page', searchable: false},
+   //              {data: 'created_at', searchable: false},
+   //              {data: 'action', searchable: false},
+   //          ],
+   //          // "fnCreatedRow": function (row, data, index) {
+   //          //     $('td', row).eq(0).html(index + 1);
+   //          // }
+   //      });
 
 
 
-    });
+   //  });
 
 
     // new page
-    $('#page-form').submit(function(e) {
-    /* Act on the event */
-      e.preventDefault();
+  //   $('#page-form').submit(function(e) {
+  //   /* Act on the event */
+  //     e.preventDefault();
 
-      var form = new FormData();
-      form.append('file', $('#file')[0].files[0]);
-      form.append('slug', $('#slug').val());
+  //     var form = new FormData();
+  //     form.append('file', $('#file')[0].files[0]);
+  //     form.append('slug', $('#slug').val());
       
-      $.ajax({
-          url: url + 'store',
-          data: form,
-          cache: false,
-          contentType: false,
-          processData: false,
-          type: 'POST',
-          success:function(response) {
-              console.log(response);
+  //     $.ajax({
+  //         url: url + 'store',
+  //         data: form,
+  //         cache: false,
+  //         contentType: false,
+  //         processData: false,
+  //         type: 'POST',
+  //         success:function(response) {
+  //             console.log(response);
 
-                // if (response.error) {
-                //   printErrorMsg(response.error);
-                // }else {
-                //   $('.print-error-msg').hide();
-                //   $('#modal-book').modal('hide');
-                //   dataTableRefresh('#table-book');
-                //   alert('Added Successfully!');
-                // }
+  //               // if (response.error) {
+  //               //   printErrorMsg(response.error);
+  //               // }else {
+  //               //   $('.print-error-msg').hide();
+  //               //   $('#modal-book').modal('hide');
+  //               //   dataTableRefresh('#table-book');
+  //               //   alert('Added Successfully!');
+  //               // }
 
-          },
-          error: function(response) {
-            console.log('Error: ' + response)
-          }
-      });
-  });
+  //         },
+  //         error: function(response) {
+  //           console.log('Error: ' + response)
+  //         }
+  //     });
+  // });
   // end new page
 </script>
 

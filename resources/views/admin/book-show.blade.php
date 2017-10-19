@@ -36,7 +36,6 @@
               <i class="fa fa-plus-circle"></i> Add Page
             </a>
 
-            <br />
             {{-- pagination --}}
             <center>
               {{ $pages->links() }}

@@ -13,4 +13,8 @@ class Book extends Model
 		return $this->hasMany('\App\Page');
 	}
 
+	public function cover()
+	{
+		return $this->pages()->first();
+	}
 }

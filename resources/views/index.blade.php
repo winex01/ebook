@@ -11,7 +11,11 @@
   @foreach($books as $book)
     <div class="row">
         <div class="col-lg-3 col-md-3">
-              <img class="img-responsive img-thumbnail" src="{{ url('uploads/pages').$book->cover }}">
+              @if(isset($book->cover()->page))
+                <img class="img-responsive img-thumbnail" src="{{ url($book->cover()->page) }}">
+              @else
+                <img class="img-responsive img-thumbnail" src="">
+              @endif
               <div align="center">
                 <span class="label label-primary" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 012</span>
                 <span class="label label-success" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 024</span>

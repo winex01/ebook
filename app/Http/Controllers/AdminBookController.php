@@ -87,9 +87,12 @@ class AdminBookController extends Controller
     public function delete(Book $book)
     {
         $deleted = $book->title;
-        Book::destroy($book->id);
+        // Book::destroy($book->id);
 
-        return response()->json(['title' => $deleted]);
+        // TODO delete all/unlink pages photo
+
+        // return response()->json(['title' => $deleted]);
+        return response()->json($book->pages);
     }
 
     public function show($slug)

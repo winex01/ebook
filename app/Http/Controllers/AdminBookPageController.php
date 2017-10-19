@@ -66,9 +66,7 @@ class AdminBookPageController extends Controller
             ->addColumn('page', function ($page) {
                 return '<center><img src="'.url($page->page).'" class="img-responsive img-rounded" alt="Image" width="50px" height="75px"></center>';
             })
-            ->rawColumns(['action', 'page'])
-            ->addIndexColumn();
-
+            ->rawColumns(['action', 'page']);
 
             return $dt->make(true);
 

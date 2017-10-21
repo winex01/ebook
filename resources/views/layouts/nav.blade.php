@@ -36,20 +36,43 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             
-            <li class="@active('login', 'active') @active('admin/login', 'active')">
-                <a href="{{ url('login') }}">
-                  <i class="fa fa-sign-in"></i>
-                  Signin 
-                </a>
-            </li>
-            
-            <li class="@active('register', 'active')">
-                <a href="{{ url('register') }}">
-                  <i class="fa fa-user"></i>
-                  Signup 
-                </a>
-            </li>
-         
+
+            @if (Auth::guard('web')->check() || Auth::guard('admin')->check())
+              {{-- authenticated --}}
+               @if (Auth::guard('web')->check())
+                  <li>
+                      <a href="{{ route('home') }}">
+                        <i class="fa fa-user"></i>
+                          {{ Auth::user()->name }}
+                      </a>
+                  </li>
+               @endif
+
+               @if (Auth::guard('admin')->check())
+                  <li>
+                      <a href="{{ route('admin.dashboard') }}">
+                        <i class="fa fa-user"></i>
+                          Administrator
+                      </a>
+                  </li>
+               @endif
+            @else
+              {{-- not authenticated --}}
+              <li class="@active('login', 'active') @active('admin/login', 'active')">
+                  <a href="{{ url('login') }}">
+                    <i class="fa fa-sign-in"></i>
+                    Signin 
+                  </a>
+              </li>
+              
+              <li class="@active('register', 'active')">
+                  <a href="{{ url('register') }}">
+                    <i class="fa fa-user"></i>
+                    Signup 
+                  </a>
+              </li>
+            @endif
+
           </ul>
         </div>
         <!-- /.navbar-custom-menu -->
@@ -58,3 +81,15 @@
       <!-- /.container-fluid -->
     </nav>
   </header>
+
+{{-- @if (Auth::guard('web')->check())
+  <p class="text-success">You are logged in as <strong>USER!</strong></p>
+@else
+  <p class="text-danger">You are logged out as <strong>USER!</strong></p>
+@endif
+
+@if (Auth::guard('admin')->check())
+  <p class="text-success">You are logged in as <strong>ADMIN!</strong></p>
+@else
+  <p class="text-danger">You are logged out as <strong>ADMIN!</strong></p>
+@endif --}}

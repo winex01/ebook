@@ -10,7 +10,7 @@ class Book extends Model
 
 	public function pages()
 	{
-		return $this->hasMany('\App\Page');
+		return $this->hasMany(Page::class);
 	}
 
 	public function cover()

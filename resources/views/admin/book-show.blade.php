@@ -36,6 +36,17 @@
               <i class="fa fa-plus-circle"></i> Add Page
             </a>
 
+            @if(count($pages) > 0)
+              <div class="pull-right">
+                <div class="btn-group">
+                  <a href="#" class="btn btn-default"><i class="fa fa-edit"></i> Change</a>
+                  {{-- delete --}}
+                  <a data-toggle="modal" href="#modal-confirm-delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                </div>
+              </div>
+              <hr>
+            @endif
+
             {{-- pagination --}}
             <center>
               {{ $pages->links() }}
@@ -45,7 +56,7 @@
             <div class="container-fluid">
               
               @foreach($pages as $page)
-                <img src="{{ url($page->page) }}" class="img-responsive img-thumbnail" alt="Image">
+                  <img src="{{ url($page->page) }}" class="img-responsive img-thumbnail" alt="Image">
               @endforeach
 
             </div>
@@ -105,7 +116,43 @@
     {{-- / modal page --}}
 
 
-    @include('partials.confirm-delete')
+    @if(count($pages) > 0)
+      {{-- confirm delete modal --}}
+      <div class="modal fade" id="modal-confirm-delete">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">System Message</h4>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete this <strong>permanently</strong>?</p>
+            
+
+               <form method="POST" action="{{ url('admin/page/delete/'.$page->id) }}">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input type="hidden" name="slug" id="slug" value="{{ $book->slug }}">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close
+                <i class="fa fa-remove"></i>
+              </button>
+              <button type="submit" class="btn btn-danger">Confirm
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+            
+              </form>
+            
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+    @endif
 
 @endsection
 
@@ -114,9 +161,14 @@
 @section('script')
 
 <script type="text/javascript">
-    
-  var url = '/admin/page/';
+   
+  
+  {{-- delete page --}}
+  
 
+
+
+  // var url = '/admin/page/';
   // display book tables
    // $(function() {
    //     $('#table-page').DataTable({

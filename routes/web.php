@@ -36,6 +36,6 @@ Route::prefix('admin')->group(function() {
 	// book page
 	Route::post('/page/store', 'AdminBookPageController@store');
 	Route::get('/page/all/{id}', 'AdminBookPageController@all');	
-
+	Route::delete('/page/delete/{page}', 'AdminBookPageController@delete');
 });
 

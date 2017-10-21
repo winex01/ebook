@@ -71,9 +71,18 @@ class AdminBookPageController extends Controller
             ->rawColumns(['action', 'page']);
 
             return $dt->make(true);
+    }
 
+    public function delete(\App\Page $page, Request $request)
+    {   
+        // dump($request->slug);
 
-
+        \File::delete($page->page);
+        \App\Page::destroy($page->id);
+        
+        // dump($page);
+        
+        return redirect('admin/book/show/'.$request->slug);
     }
     
 }

@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="box-body">
-          Start creating your amazing application!
+          Dashboard is underconstruction!
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

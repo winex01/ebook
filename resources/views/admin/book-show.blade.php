@@ -41,7 +41,7 @@
             @if(count($pages) > 0)
               <div class="pull-right">
                 <div class="btn-group">
-                  <a href="#" class="btn btn-default"><i class="fa fa-edit"></i> Change</a>
+                  <a href="#" id="change-page" class="btn btn-default"><i class="fa fa-edit"></i> Change</a>
                   {{-- delete --}}
                   <a data-toggle="modal" href="#modal-confirm-delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                 </div>
@@ -82,7 +82,6 @@
     </section>
     <!-- /.content -->
 
-
     {{-- modal page --}}
     <div class="modal fade" id="modal-page">
       <div class="modal-dialog">
@@ -99,7 +98,7 @@
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="file">File:</label>
                   <div class="col-sm-10">
-                    <input type="file" class="form-control" name="file" id="file">
+                    <input type="file" class="form-control" name="file" id="file" required>
                   </div>
                 </div>
               {{-- / file --}}
@@ -142,7 +141,7 @@
               <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close
                 <i class="fa fa-remove"></i>
               </button>
-              <button type="submit" class="btn btn-danger">Confirm
+              <button id="submit-modal-page" type="submit" class="btn btn-danger">Confirm
                 <i class="fa fa-check" aria-hidden="true"></i>
               </button>
             
@@ -165,6 +164,13 @@
 
 <script type="text/javascript">
    
+  {{-- change page --}}
+  $('#change-page').click(function(event) {
+    /* Act on the event */
+    $('#modal-page').modal();
+  });
+
+
   // var url = '/admin/page/';
   // display book tables
    // $(function() {

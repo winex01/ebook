@@ -43,7 +43,12 @@ class AdminBookPageController extends Controller
         $page->page = $uploadPath.'/'.$fileName.$fileExtension;
 
         $book = \App\Book::where('slug', $request->slug)->first();
-        $book->pages()->save($page);
+        $temp = $book->pages()->save($page);
+
+        if($temp) {
+            $msg = 'New Page is added successfully!';
+            flash($msg)->success();
+        }
 
     	// return response()->json($page);
         return back();
@@ -78,10 +83,17 @@ class AdminBookPageController extends Controller
         // dump($request->slug);
 
         \File::delete($page->page);
-        \App\Page::destroy($page->id);
+        $temp = \App\Page::destroy($page->id);
         
         // dump($page);
         
+        if($temp) {
+            // flash('Page is deleted successfully!')->overlay();        
+            // flash()->overlay('Page is deleted successfully!', 'System Message');
+            $msg = 'Page is deleted successfully!';
+            flash($msg)->success();
+        }
+
         return redirect('admin/book/show/'.$request->slug);
     }
     

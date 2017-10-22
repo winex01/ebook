@@ -31,6 +31,8 @@
         <div class="box-body">
 
 
+            @include('flash::message')
+
             {{-- button page --}}
             <a class="btn btn-default" data-toggle="modal" href='#modal-page'>
               <i class="fa fa-plus-circle"></i> Add Page
@@ -46,6 +48,7 @@
               </div>
               <hr>
             @endif
+
 
             {{-- pagination --}}
             <center>
@@ -162,12 +165,6 @@
 
 <script type="text/javascript">
    
-  
-  {{-- delete page --}}
-  
-
-
-
   // var url = '/admin/page/';
   // display book tables
    // $(function() {

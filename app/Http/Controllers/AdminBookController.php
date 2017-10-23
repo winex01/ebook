@@ -87,6 +87,11 @@ class AdminBookController extends Controller
     public function delete(Book $book)
     {
         $deleted = $book->title;
+
+        foreach ($book->pages as $page) {
+            \File::delete($page->page);
+        }
+
         Book::destroy($book->id);
 
         // TODO delete all/unlink pages photo

@@ -96,7 +96,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close
                   <i class="fa fa-close"></i>
                 </button>
-                <button type="submit" id="save-book" value="add" type="button" class="btn btn-primary">Save changes
+                <button type="submit" id="save-book" value="add" type="button" class="btn btn-primary">Save
                   <i class="fa fa-check"></i>
                 </button>
               </form>

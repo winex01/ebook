@@ -47,7 +47,7 @@
                       @if(count($pages) > 0)
                         <div class="pull-right">
                           <div class="btn-group">
-                            <a href="#modal-page-update"  data-toggle="modal" class="btn btn-default"><i class="fa fa-edit"></i> Update</a>
+                            <a href="#modal-page-update"  data-toggle="modal" class="btn btn-default"><i class="fa fa-edit"></i>Edit</a>
                             {{-- delete --}}
                             <a data-toggle="modal" href="#modal-confirm-delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                           </div>
@@ -133,7 +133,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Update Page</h4>
+            <h4 class="modal-title">Edit Page</h4>
           </div>
           <div class="modal-body">
               {{-- form --}}

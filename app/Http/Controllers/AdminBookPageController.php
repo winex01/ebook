@@ -36,7 +36,7 @@ class AdminBookPageController extends Controller
     	$uploadPath = 'uploads/page';
         $fileName = time().uniqid().'.'; 
         $fileExtension = $request->file->getClientOriginalExtension();
-        // store uploaded files in upload/pdf
+        // store uploaded files in upload/
         $request->file->move(public_path($uploadPath), $fileName.$fileExtension);
 
         $page = new \App\Page();
@@ -95,6 +95,39 @@ class AdminBookPageController extends Controller
         }
 
         return redirect('admin/book/show/'.$request->slug);
+    }
+
+    public function update(Request $request)
+    {
+        // dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|mimes:jpeg,bmp,png,jpg',
+            'id' => 'required'
+        ]);
+
+
+        // if validation fails
+        if ($validator->fails()) {
+            // return response()->json(['error'=>$validator->errors()->all()]);
+            flash('Invalid Request!')->danger();
+        }
+
+        $page = \App\Page::findOrFail($request->id);
+
+        // delete page
+        if (\File::delete($page->page)) {
+            // if deleted successfully
+            $uploadPath = 'uploads/page';
+            // store uploaded files in upload/
+            $moved = $request->file->move(public_path($uploadPath), $page->page);
+            
+            if ($moved) {
+                flash('Page is updated successfully!')->success();
+            }
+        }
+        
+        return back();
+
     }
     
 }

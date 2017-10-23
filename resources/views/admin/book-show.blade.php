@@ -47,7 +47,7 @@
                       @if(count($pages) > 0)
                         <div class="pull-right">
                           <div class="btn-group">
-                            <a href="#" id="change-page" class="btn btn-default"><i class="fa fa-edit"></i> Change</a>
+                            <a href="#modal-page-update"  data-toggle="modal" class="btn btn-default"><i class="fa fa-edit"></i> Update</a>
                             {{-- delete --}}
                             <a data-toggle="modal" href="#modal-confirm-delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                           </div>
@@ -102,6 +102,7 @@
               {{-- form --}}
               <form class="form-horizontal" action="{{ url('/admin/page/store') }}" method="POST" id="page-form" enctype="multipart/form-data">
                  {{ csrf_field() }}
+                 <input type="hidden" name="type" value="add">
                 {{-- file --}}
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="file">File:</label>
@@ -115,8 +116,8 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close <i class="fa fa-close"></i></button>
-            <button type="submit" class="btn btn-primary">Save changes <i class="fa fa-check"></i></button>
+            <button id="submit-page" type="button" class="btn btn-default" data-dismiss="modal">Close <i class="fa fa-close"></i></button>
+            <button type="submit" class="btn btn-primary">Save<i class="fa fa-check"></i></button>
               </form>
               {{-- / form --}}
           </div>
@@ -126,6 +127,43 @@
     {{-- / modal page --}}
 
 
+    {{-- update modal page --}}
+     <div class="modal fade" id="modal-page-update">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Update Page</h4>
+          </div>
+          <div class="modal-body">
+              {{-- form --}}
+              <form class="form-horizontal" action="{{ url('/admin/page/update') }}" method="POST" id="page-form" enctype="multipart/form-data">
+                 {{ csrf_field() }}
+                 {{ method_field('PATCH') }}
+                {{-- file --}}
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="file">File:</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="file" id="file" required>
+                  </div>
+                </div>
+              {{-- / file --}}
+
+              <input type="hidden" id="id" name="id" value="{{ isset($pages[0]->id) ? $pages[0]->id : '' }}">
+
+          </div>
+          <div class="modal-footer">
+            <button id="submit-page" type="button" class="btn btn-default" data-dismiss="modal">Close <i class="fa fa-close"></i></button>
+            <button type="submit" class="btn btn-primary">Save changes <i class="fa fa-check"></i></button>
+              </form>
+              {{-- / form --}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{-- / update modal page --}}
+
+{{-- delete page--}}
     @if(count($pages) > 0)
       {{-- confirm delete modal --}}
       <div class="modal fade" id="modal-confirm-delete">
@@ -163,7 +201,7 @@
       </div>
       <!-- /.modal -->
     @endif
-
+{{-- / delete page --}}
 @endsection
 
 
@@ -172,12 +210,6 @@
 
 <script type="text/javascript">
    
-  {{-- change page --}}
-  $('#change-page').click(function(event) {
-    /* Act on the event */
-    $('#modal-page').modal();
-  });
-
 
   // var url = '/admin/page/';
   // display book tables

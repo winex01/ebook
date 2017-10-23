@@ -16,7 +16,7 @@
           {{-- breadcramps --}}
           <ol class="breadcrumb">
             <li><a href="{{ route('admin.books') }}">Manage Books</a></li>
-            <li><a href="{{ route('admin.books') }}">Book List</a></li>
+            <li><a href="{{ route('admin.books') }}">Book Lists</a></li>
             <li class="@active('admin/book/show/*', 'active')">{{ $book['title'] }}</li>
           </ol>
           {{-- / brandcramps --}}
@@ -30,45 +30,53 @@
         </div>
         <div class="box-body">
 
+              @include('flash::message')
 
-            @include('flash::message')
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">{{ $book['title'] }}</h3>
+                </div>
+                <div class="panel-body">
+                    
 
-            {{-- button page --}}
-            <a class="btn btn-default" data-toggle="modal" href='#modal-page'>
-              <i class="fa fa-plus-circle"></i> Add Page
-            </a>
+                      {{-- button page --}}
+                      <a class="btn btn-default" data-toggle="modal" href='#modal-page'>
+                        <i class="fa fa-plus-circle"></i> Add Page
+                      </a>
 
-            @if(count($pages) > 0)
-              <div class="pull-right">
-                <div class="btn-group">
-                  <a href="#" id="change-page" class="btn btn-default"><i class="fa fa-edit"></i> Change</a>
-                  {{-- delete --}}
-                  <a data-toggle="modal" href="#modal-confirm-delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                      @if(count($pages) > 0)
+                        <div class="pull-right">
+                          <div class="btn-group">
+                            <a href="#" id="change-page" class="btn btn-default"><i class="fa fa-edit"></i> Change</a>
+                            {{-- delete --}}
+                            <a data-toggle="modal" href="#modal-confirm-delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                          </div>
+                        </div>
+                        <hr>
+                      @endif
+
+                      {{-- pagination --}}
+                      <center>
+                        {{ $pages->links() }}
+                      </center>
+                      {{-- / pagination --}}
+
+                      <div class="container-fluid">
+                        
+                        @foreach($pages as $page)
+                            <img src="{{ url($page->page) }}" class="img-responsive img-thumbnail" alt="Image">
+                        @endforeach
+
+                      </div>
+
+                      {{-- pagination --}}
+                      <center>
+                        {{ $pages->links() }}
+                      </center>
+                      {{-- / pagination --}}
+
                 </div>
               </div>
-              <hr>
-            @endif
-
-
-            {{-- pagination --}}
-            <center>
-              {{ $pages->links() }}
-            </center>
-            {{-- / pagination --}}
-
-            <div class="container-fluid">
-              
-              @foreach($pages as $page)
-                  <img src="{{ url($page->page) }}" class="img-responsive img-thumbnail" alt="Image">
-              @endforeach
-
-            </div>
-
-            {{-- pagination --}}
-            <center>
-              {{ $pages->links() }}
-            </center>
-            {{-- / pagination --}}
 
         </div>
         <!-- /.box-body -->

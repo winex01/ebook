@@ -17,7 +17,7 @@
                 </center>
               @else
                 <center>
-                  <img class="img-responsive img-thumbnail" style="height: 240px" src="{{ url('images/default-cover.jpg') }}">
+                  <img class="img-responsive img-thumbnail" src="{{ url('images/default-cover.jpg') }}">
                 </center>
               @endif
               <div align="center">

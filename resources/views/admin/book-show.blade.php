@@ -137,7 +137,7 @@
           </div>
           <div class="modal-body">
               {{-- form --}}
-              <form class="form-horizontal" action="{{ url('/admin/book/update') }}" method="POST" id="page-form" enctype="multipart/form-data">
+              <form class="form-horizontal" action="{{ url('/admin/page/update') }}" method="POST" id="page-form" enctype="multipart/form-data">
                  {{ csrf_field() }}
                  {{ method_field('PATCH') }}
                 {{-- file --}}

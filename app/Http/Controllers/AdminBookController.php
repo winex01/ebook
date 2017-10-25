@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Book;
 use DataTables;
 use Validator;
 
@@ -25,18 +24,18 @@ class AdminBookController extends Controller
      */
     public function all()
     {
-        $books = Book::select(['id', 'title', 'created_at' , 'slug']);
+        $books = \App\Book::select(['id', 'title', 'created_at' , 'slug', 'description']);
         return DataTables::of($books)->addColumn('action', function ($book) {
                 return '
                 	<div align="center">
                 		<a href="book/show/'.$book->slug.'" class="btn btn-xs btn-info"><i class="fa fa-search"></i> Select</a>
-                		<button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
+                		<button onclick="edit('.htmlentities($book).')" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
                 		<button onclick="deleteBook('.$book->id.', \'' .$book->title. '\')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
                 	</div>
                 ';
             })->make(true);
     }
-
+// <button onclick="edit('.$book->id.', \'' .$book->title. '\', \'' .$book->description. '\')" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
     /**
      * add new book
      *
@@ -57,11 +56,11 @@ class AdminBookController extends Controller
 
         // check if slug exist if it does incre at end
         $slug = str_slug($request->title);
-        $count = Book::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+        $count = \App\Book::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
         $slug = $count ? "{$slug}-{$count}" : $slug;
 
         // save new book
-        $book = Book::create([
+        $book = \App\Book::create([
             'title'       => title_case($request->title),
             'slug'        => $slug,
             'description' => $request->description
@@ -84,15 +83,16 @@ class AdminBookController extends Controller
      *
      * @return void
      */
-    public function delete(Book $book)
+    public function delete(Request $request)
     {
+        $book = \App\Book::findOrFail($request->id);
         $deleted = $book->title;
 
         foreach ($book->pages as $page) {
             \File::delete($page->page);
         }
 
-        Book::destroy($book->id);
+        \App\Book::destroy($book->id);
 
         // TODO delete all/unlink pages photo
 
@@ -101,13 +101,39 @@ class AdminBookController extends Controller
 
     public function show($slug)
     {
-        $book = Book::where('slug', $slug)->first();
+        $book = \App\Book::where('slug', $slug)->first();
 
         $pages = \App\Page::where('book_id', $book->id)->paginate(1);
 
         return view('admin.book-show', compact('book', 'pages'));
     }
 
+    public function update(Request $request)
+    {
+        // return response()->json($request->all());
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'title' => 'required',
+            'description' => 'required|min:150'
+        ]);
 
+        if ($validator->fails()) {
+            // return error json
+        }
+
+        // check if slug exist if it does incre at end
+        $slug = str_slug($request->title);
+        $count = \App\Book::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+        $slug = $count ? "{$slug}-{$count}" : $slug;
+
+        //save success
+        $book = \App\Book::findOrFail($request->id);
+        $book->title = title_case($request->title);
+        $book->description = $request->description;
+        $book->slug = $slug;
+        $book->save();
+
+        return json_encode($book);
+    }
 
 }

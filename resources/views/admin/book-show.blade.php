@@ -137,7 +137,7 @@
           </div>
           <div class="modal-body">
               {{-- form --}}
-              <form class="form-horizontal" action="{{ url('/admin/page/update') }}" method="POST" id="page-form" enctype="multipart/form-data">
+              <form class="form-horizontal" action="{{ url('/admin/book/update') }}" method="POST" id="page-form" enctype="multipart/form-data">
                  {{ csrf_field() }}
                  {{ method_field('PATCH') }}
                 {{-- file --}}
@@ -154,7 +154,7 @@
           </div>
           <div class="modal-footer">
             <button id="submit-page" type="button" class="btn btn-default" data-dismiss="modal">Close <i class="fa fa-close"></i></button>
-            <button type="submit" class="btn btn-primary">Save changes <i class="fa fa-check"></i></button>
+            <button type="submit" class="btn btn-primary">Update <i class="fa fa-check"></i></button>
               </form>
               {{-- / form --}}
           </div>
@@ -210,6 +210,8 @@
 
 <script type="text/javascript">
    
+  
+
 
   // var url = '/admin/page/';
   // display book tables

@@ -96,7 +96,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close
                   <i class="fa fa-close"></i>
                 </button>
-                <button type="submit" id="save-book" value="add" type="button" class="btn btn-primary">Save
+                <button type="submit" type="button" class="btn btn-primary">Save
                   <i class="fa fa-check"></i>
                 </button>
               </form>
@@ -105,6 +105,57 @@
         </div>
       </div>
     </div>
+
+
+    {{-- book edit modal --}}
+    <div class="modal fade" id="modal-book-edit">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Edit Book</h4>
+          </div>
+          <div class="modal-body">
+              {{-- flash message --}}
+              @include('partials.flash-error')
+
+              {{-- form --}}
+              <form class="form-horizontal" id="book-form-edit">
+
+                {{-- {{ csrf_field() }}
+                {{ method_field('PATCH') }} --}}
+
+                <input type="hidden" id="edit-id">
+
+                {{-- title --}}
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="edit-title">Title:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="edit-title" placeholder="Book Title" autofocus>
+                  </div>
+                </div>
+                {{-- description --}}
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="edit-description">Description:</label>
+                  <div class="col-sm-10"> 
+                      <textarea class="form-control" rows="10" id="edit-description" placeholder="Enter Book Description."></textarea>
+                  </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                  <i class="fa fa-close"></i>
+                </button>
+                <button type="submit" type="button" class="btn btn-primary">Update
+                  <i class="fa fa-check"></i>
+                </button>
+              </form>
+              {{-- / form --}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{-- / book edit modal --}}
 
 
     @include('partials.confirm-delete')
@@ -155,13 +206,15 @@
 
       id = book_id;
   }
-
   $('#btn-confirm-delete').click(function(event) {
         /* Act on the event */
         $.ajax({
 
             type: "DELETE",
-            url: url + 'delete/' + id,
+            url: url + 'delete/',
+            data: {
+              id : id
+            },
             success: function (data) {
                 
                 console.log(data);
@@ -214,6 +267,52 @@
       
 
   });
+
+
+
+  // edit book modal
+  function edit(book) {
+    $('#edit-title').val(book.title);
+    $('#edit-description').val(book.description);
+    $('#edit-id').val(book.id);
+    $('#modal-book-edit').modal();
+  }
+  $('#book-form-edit').submit(function(event) {
+    /* Act on the event */
+    event.preventDefault();
+
+    $.ajax({
+
+        type: "PATCH",
+        url: 'book/update',
+        dataType: 'json',
+        data: {
+          id: $('#edit-id').val(),
+          title: $('#edit-title').val(),
+          description: $('#edit-description').val()
+        },
+        success: function (data) {
+            
+            console.log(data);
+
+            if (data.title) {
+              dataTableRefresh('#table-book');
+              printSuccessMsg(data.title, 'Updated');
+              $('#modal-book-edit').modal('hide');
+            }else{
+              if (data.error) {
+                printErrorMsg(data.error);
+              }
+            }
+
+        },
+        error: function (data) {
+            console.log('Error:', data);
+        }
+
+    });
+  });
+  // / edit book modal
 
 
   // example for uploading files 

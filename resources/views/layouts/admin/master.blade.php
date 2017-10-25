@@ -13,7 +13,6 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    
       {{-- content --}}
         @yield('content')
       {{-- end content --}}

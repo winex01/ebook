@@ -29,9 +29,10 @@ Route::prefix('admin')->group(function() {
 	
 	// book
 	Route::get('/book/show/{slug}', 'AdminBookController@show');
-	Route::delete('/book/delete/{book}', 'AdminBookController@delete');
+	Route::delete('/book/delete/', 'AdminBookController@delete');
 	Route::post('/book/store', 'AdminBookController@store')->name('book.store');	
-	Route::get('/book/all', 'AdminBookController@all');	
+	Route::get('/book/all', 'AdminBookController@all');
+	Route::patch('/book/update', 'AdminBookController@update');	
 
 	// book page
 	Route::post('/page/store', 'AdminBookPageController@store');

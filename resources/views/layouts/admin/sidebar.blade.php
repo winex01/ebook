@@ -27,17 +27,15 @@
         
         <li class="header">MAIN NAVIGATION</li>
         
+        {{-- dashboard module --}}
         <li class="@active('admin', 'active')">
           <a href="{{ route('admin.dashboard') }}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-
-{{--         <li class="@active('admin/books', 'active')">
-          <a href="{{ route('admin.books') }}"><i class="fa fa-book"></i> <span>Books</span></a>
-        </li> --}}
-
-
+        {{-- / dashboard module --}}
+        
+        {{-- manage books --}}
         <li class="treeview @active('admin/books', 'active') @active('admin/book/show/*', 'active')">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Manage Books</span>
@@ -49,6 +47,7 @@
             <li class="@active('admin/books', 'active')"><a href="{{ route('admin.books') }}"><i class="fa fa-circle-o"></i> Book Lists</a></li>
           </ul>
         </li>
+        {{-- / manage books --}}
 
          
         {{-- <li>

@@ -23,7 +23,8 @@ class AdminPagesController extends Controller
      */
     public function index()
     {
-        return view('admin.admin-dashboard');
+        $totalBooks = \App\Book::count();
+        return view('admin.admin-dashboard', compact('totalBooks'));
     }
 
     public function books()

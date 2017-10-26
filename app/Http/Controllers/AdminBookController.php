@@ -144,5 +144,5 @@ class AdminBookController extends Controller
 
         return json_encode($book);
     }
-
+    
 }

@@ -15,6 +15,7 @@
           
           {{-- breadcramps --}}
           <ol class="breadcrumb">
+            <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
             <li><a href="{{ route('admin.books') }}">Manage Books</a></li>
             <li><a href="{{ route('admin.books') }}">Book Lists</a></li>
             <li class="@active('admin/book/show/*', 'active')">{{ $book['title'] }}</li>

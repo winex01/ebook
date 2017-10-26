@@ -40,9 +40,9 @@
             <table id="table-book" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>#</th>
+                  <th>ID</th>
                   <th>Title</th>
-                  <th>Uploaded</th>
+                  <th>Description</th>
                   <th><center>Action</center></th>
                 </tr>
                 </thead>
@@ -158,6 +158,24 @@
     {{-- / book edit modal --}}
 
 
+
+    <div class="modal fade" id="modal-read-description">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" style="font-weight: bold;">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     @include('partials.confirm-delete')
 
 @endsection
@@ -171,21 +189,21 @@
 
   // display book tables
    $(function() {
-        $('#table-book').DataTable({
+        var table = $('#table-book').DataTable({
             processing: true,
             serverSide: true,
             ajax: url + 'all',
+            columnDefs: [
+              { "width": "50%", "targets": 2 }
+            ],
             columns: [
                 {data: 'id'},
                 {data: 'title'},
-                {data: 'created_at'},
+                {data: 'description'},
                 {data: 'action'},
-            ],
-            "fnCreatedRow": function (row, data, index) {
-                $('td', row).eq(0).html(index + 1);
-            }
+            ]
         });
-    });
+    }); //end dready
 
    //open new/add book modal
   $('#add-book').click(function(event) {
@@ -313,6 +331,14 @@
     });
   });
   // / edit book modal
+
+  // moda read description
+  function readDescription(book)
+  {
+    $('#modal-read-description .modal-title').text(book.title);
+    $('#modal-read-description .modal-body').text(book.description);
+    $('#modal-read-description').modal();
+  }
 
 
   // example for uploading files 

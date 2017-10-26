@@ -24,16 +24,24 @@ class AdminBookController extends Controller
      */
     public function all()
     {
-        $books = \App\Book::select(['id', 'title', 'created_at' , 'slug', 'description']);
+        $books = \App\Book::select(['id', 'title', 'slug', 'description']);
         return DataTables::of($books)->addColumn('action', function ($book) {
                 return '
                 	<div align="center">
-                		<a href="book/show/'.$book->slug.'" class="btn btn-xs btn-info"><i class="fa fa-search"></i> Select</a>
-                		<button onclick="edit('.htmlentities($book).')" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
-                		<button onclick="deleteBook('.$book->id.', \'' .$book->title. '\')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                        <div class="btn-group"> 
+                    		<a href="book/show/'.$book->slug.'" class="btn btn-xs btn-info"><i class="fa fa-search"></i> Select</a>
+                    		<button onclick="edit('.htmlentities($book).')" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
+                    		<button onclick="deleteBook('.$book->id.', \'' .$book->title. '\')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                        </div>
                 	</div>
                 ';
-            })->make(true);
+            })
+            ->editColumn('description', function ($book){
+                $link = ' <a onclick="readDescription('.htmlentities($book).')" href="javascript:;" data-toggle="tooltip" title="Read More">(...)</a>';
+                return str_limit($book->description, 80, $link);
+            })
+            ->rawColumns(['action', 'description'])
+            ->make(true);
     }
 // <button onclick="edit('.$book->id.', \'' .$book->title. '\', \'' .$book->description. '\')" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
     /**

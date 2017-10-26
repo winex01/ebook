@@ -30,7 +30,8 @@
          <h4><a href="#" class="text-info">{{ $book->title }}</a></h4>
 
           <p>
-            {{ $book->description }}
+            @php($link = '<a href="javascript:;"> (...)</a>')
+            {!! str_limit($book->description, 500, $link) !!}
           </p>
 
           <p>

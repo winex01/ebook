@@ -127,6 +127,7 @@ class AdminBookController extends Controller
 
         if ($validator->fails()) {
             // return error json
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
 
         // check if slug exist if it does incre at end

@@ -116,12 +116,19 @@ class AdminBookPageController extends Controller
 
         // delete page
         if (\File::delete($page->page)) {
-            // if deleted successfully
-            $uploadPath = 'uploads/page';
-            // store uploaded files in upload/
-            $moved = $request->file->move(public_path($uploadPath), $page->page);
             
-            if ($moved) {
+            // if validation success
+            $uploadPath = 'uploads/page';
+            $fileName = time().uniqid().'.'; 
+            $fileExtension = $request->file->getClientOriginalExtension();
+            // store uploaded files in upload/
+            $moved = $request->file->move(public_path($uploadPath), $fileName.$fileExtension);
+
+            $page->page = $uploadPath.'/'.$fileName.$fileExtension;
+            $saved = $page->save();
+
+            if ($moved && $saved) {
+            
                 flash('Page is updated successfully!')->success();
             }
         }

@@ -22,8 +22,8 @@
               @endif
               <div align="center">
                 <span class="label label-primary" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> 012</span>
-                <span class="label label-success" data-toggle="tooltip" title="Bookmark"><i class="fa fa-bookmark-o"></i> 024</span>
-                <span class="label label-danger" data-toggle="tooltip" title="Download"><i class="fa fa-cloud-download"></i> 004</span>
+                <span class="label label-success" data-toggle="tooltip" title="Bookmarks"><i class="fa fa-bookmark-o"></i> 024</span>
+                <span class="label label-danger" data-toggle="tooltip" title="Downloads"><i class="fa fa-cloud-download"></i> 004</span>
               </div>
         </div>
         <div class="col-lg-9 col-md-9">

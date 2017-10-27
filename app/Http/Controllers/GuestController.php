@@ -11,12 +11,12 @@ class GuestController extends Controller
     {
     	$books = \App\Book::paginate(4);
 
-    	return view('index', compact('books'));
+    	return view('guest.index', compact('books'));
     }
 
     public function bookLists()
     {
-    	return view('book-lists');
+    	return view('guest.book-lists');
     }
 
 }

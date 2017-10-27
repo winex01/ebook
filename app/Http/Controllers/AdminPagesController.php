@@ -24,7 +24,7 @@ class AdminPagesController extends Controller
     public function index()
     {
             
-        $boxes = \App\Box::getAll();
+        $boxes = \App\Box::all();
         return view('admin.admin-dashboard', compact('boxes'));
     }
 

@@ -2,11 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Box extends Model
+class Box
 {
-    public static function getAll()
+    public static function all()
     {
     	return [
     		self::totalBooks(),

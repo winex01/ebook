@@ -3,7 +3,7 @@
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
 
-  @include('layouts.nav')
+  @include('layouts.guest.nav')
 
   <!-- Full Width Column -->
   <div class="content-wrapper">

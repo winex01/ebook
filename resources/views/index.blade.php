@@ -1,9 +1,9 @@
-@extends('layouts.master')
+@extends('layouts.guest.master')
 
 
 @section('content')
 
-  @include('layouts.search-bar')
+  @include('layouts.guest.search-bar')
 
   <hr />
 

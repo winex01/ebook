@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.guest.master')
 
 @section('content')
 	<h4>Book List</h4>

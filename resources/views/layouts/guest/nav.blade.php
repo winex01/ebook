@@ -43,7 +43,7 @@
                   <li>
                       <a href="{{ route('home') }}">
                         <i class="fa fa-user"></i>
-                          {{ Auth::user()->name }}
+                          {{ ucwords(Auth::user()->name) }}
                       </a>
                   </li>
                @endif

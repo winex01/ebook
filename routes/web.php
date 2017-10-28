@@ -2,7 +2,6 @@
 
 #auth route
 Auth::routes();
-Route::get('user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 
 #guest route
@@ -13,6 +12,7 @@ Route::get('/', 'GuestController@index')->name('index');
 
 #user route
 Route::get('/home', 'UserController@index')->name('home');
+Route::get('user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 
 

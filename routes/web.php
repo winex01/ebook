@@ -8,6 +8,7 @@ Auth::routes();
 Route::get('/testing', 'TestController@index')->name('index');
 Route::get('/book-lists', 'GuestController@bookLists')->name('book.lists');
 Route::get('/', 'GuestController@index')->name('index');
+Route::get('/book/{slug}', 'GuestController@show')->middleware('authbook')->name('book.show');
 
 
 #user route

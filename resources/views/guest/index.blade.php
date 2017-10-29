@@ -35,7 +35,7 @@
           </p>
 
           <p>
-            <a href="#" class="btn btn-primary btn-xs">View Book
+            <a href="{{ url('book/'.$book->slug) }}" class="btn btn-primary btn-xs">View Book
             <i class="fa fa-chevron-right"></i>
             </a>
 

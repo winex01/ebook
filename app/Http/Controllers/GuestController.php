@@ -19,4 +19,11 @@ class GuestController extends Controller
     	return view('guest.book-lists');
     }
 
+    public function show($slug)
+    {
+    	$book = \App\Book::where('slug', $slug)->first();
+
+    	return view('guest.bookShow', compact('book'));
+    }
+
 }

@@ -15,6 +15,18 @@ class AuthorizedBook
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+
+        if (\Auth::guard('web')->check() || \Auth::guard('admin')->check()) {
+            return $next($request);
+        }
+
+        flash()->overlay('Please login to view content.', 'System Message'); 
+
+        // flash('Message')->overlay();
+
+        // flash('Message')->success();
+
+        return back();
+
     }
 }

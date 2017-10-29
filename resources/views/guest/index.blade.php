@@ -2,8 +2,11 @@
 
 
 @section('content')
-
+  
+  
   @include('layouts.guest.search-bar')
+
+  @include('flash::message')
 
   <hr />
 
@@ -71,7 +74,14 @@
   {{-- / pagination --}}
   
 
-
   {{-- / content --}}
 @endsection
 
+
+{{-- script --}}
+@section('script')
+  <script>
+      $('#flash-overlay-modal').modal();
+  </script>
+@endsection
+{{-- / script --}}

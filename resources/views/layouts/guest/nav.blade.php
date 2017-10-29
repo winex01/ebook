@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
             
-            <li class="@active('/', 'active')">
+            <li class="@active('/', 'active') @active('book/*', 'active')">
               <a href="{{ route('index') }}">
                 <i class="fa fa-home"></i>
                 Home

@@ -17,6 +17,11 @@ class AuthorizedBook
     {
 
         if (\Auth::guard('web')->check() || \Auth::guard('admin')->check()) {
+            
+            if (\Auth::guard('web')->check()) {
+                // add to view
+            }
+
             return $next($request);
         }
 

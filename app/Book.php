@@ -18,8 +18,18 @@ class Book extends Model
 		return $this->pages()->first();
 	}
 
+    public function views()
+    {
+        return $this->belongsToMany(User::class, 'book_view')->withTimestamps();
+    }
+
     public function bookmarks()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'book_user')->withTimestamps();
+    }
+
+    public function downloads()
+    {
+        return $this->belongsToMany(User::class, 'book_download')->withTimestamps();
     }
 }

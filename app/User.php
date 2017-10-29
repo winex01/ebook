@@ -27,9 +27,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function views()
+    {
+        return $this->belongsToMany(Book::class, 'book_view')->withTimestamps();
+    }
+
     public function bookmarks()
     {
-        return $this->belongsToMany(Book::class);
+        return $this->belongsToMany(Book::class, 'book_user')->withTimestamps();
+    }
+
+    public function downloads()
+    {
+        return $this->belongsToMany(Book::class, 'book_download')->withTimestamps();
     }
 
 }

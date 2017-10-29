@@ -18,9 +18,19 @@ class AuthorizedBook
 
         if (\Auth::guard('web')->check() || \Auth::guard('admin')->check()) {
             
+            // if user is login (not allow on admin)
             if (\Auth::guard('web')->check()) {
-                // add to view
+                // add book views
+                $input = $request->route()->parameters();
+
+                // select book using slug from request
+                $book = \App\Book::where('slug', $input['slug'])->firstOrFail();
+
+                // attach user to book views
+                $book->views()->attach(\Auth::user()->id);
+
             }
+
 
             return $next($request);
         }

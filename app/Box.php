@@ -7,10 +7,11 @@ class Box
     public static function all()
     {
     	return [
-    		self::totalBooks(),
-    		self::bookmarks(),
-    		self::downloads(),
+            self::totalBooks(),
     		self::userRegistration(),
+            self::totalViews(),
+            self::bookmarks(),
+            self::downloads(),
     	];
     }
 
@@ -23,6 +24,19 @@ class Box
             'color' => 'bg-aqua',
             'icon' => 'ion ion-ios-book'  
        	];
+    }
+
+    private static function totalViews()
+    {
+        $totalViews = \DB::table('book_view')->count();
+
+        return [
+            'total' => $totalViews,
+            'header' => 'Book Views',
+            'route' => 'javascript:;',
+            'color' => 'bg-primary',
+            'icon' => 'ion ion-eye'  
+        ];
     }
 
     private static function bookmarks()

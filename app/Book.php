@@ -17,4 +17,9 @@ class Book extends Model
 	{
 		return $this->pages()->first();
 	}
+
+    public function bookmarks()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

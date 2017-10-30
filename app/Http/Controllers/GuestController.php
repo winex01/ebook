@@ -53,7 +53,14 @@ class GuestController extends Controller
             $download->save();
         }
 
-        dd(\App\Download::thisBook($slug));
+        $path = \App\Download::thisBook($slug);
+
+        if(!empty($path)) {
+            $response = response()->download($path, $slug.'.zip')->deleteFileAfterSend(true);
+            ob_end_clean();
+
+            return $response;
+        }
 
         return back();        
     }

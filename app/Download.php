@@ -32,6 +32,21 @@ class Download
     {
         $book = \App\Book::where('slug', $slug)->firstOrFail();
         
+        $files = [];
+        foreach($book->pages as $page) {
+            $files[] = $page->page;
+        }
+
+        if (!empty($files)) {
+            
+            $path_filename = 'zip/'.$slug.uniqid().'.zip'; 
+            \Zipper::make($path_filename)->folder($slug)->add($files)->close();
+
+            return public_path($path_filename);
+        }else{
+            $filename = str_replace('-', ' ', ucwords($slug));
+            flash()->overlay($filename.' has no page yet.', 'System Message');
+        }
 
     }
 

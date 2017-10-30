@@ -8,8 +8,11 @@ Auth::routes();
 Route::get('/testing', 'TestController@index')->name('index');
 Route::get('/book-lists', 'GuestController@bookLists')->name('book.lists');
 Route::get('/', 'GuestController@index')->name('index');
-Route::get('/book/{slug}', 'GuestController@show')->middleware('authbook')->name('book.show');
-
+Route::middleware(['authbook'])->group(function () {
+	Route::get('/book/{slug}/{type}', 'GuestController@show')->name('book.show');
+	Route::get('/book/bookmark/{slug}/{type}', 'GuestController@show')->name('book.bookmark');
+	Route::get('/book/download/{slug}/{type}', 'GuestController@show')->name('book.download');
+});
 
 #user route
 Route::get('/home', 'UserController@index')->name('home');

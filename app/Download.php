@@ -28,8 +28,12 @@ class Download
 
     }//end save
 
-    public static function booked()
+    public static function thisBook($slug)
     {
+        $book = \App\Book::where('slug', $slug)->firstOrFail();
         
+
     }
+
+
 }

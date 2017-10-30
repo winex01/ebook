@@ -52,8 +52,8 @@ class GuestController extends Controller
             $download->save();
         }
 
-        \App\Download::booked();
-        
+        dd(\App\Download::thisBook($slug));
+
         return back();        
     }
 

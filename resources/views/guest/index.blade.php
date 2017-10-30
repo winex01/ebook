@@ -38,15 +38,15 @@
           </p>
 
           <p>
-            <a href="{{ route('book.show', [$book->slug, 'views']) }}" class="btn btn-primary btn-xs">View Book
+            <a href="{{ route('book.show', [$book->slug, 'view']) }}" class="btn btn-primary btn-xs">View Book
             <i class="fa fa-chevron-right"></i>
             </a>
 
-            <a href="{{ route('book.show', [$book->slug, 'bookmarks']) }}" class="btn btn-success btn-xs">Bookmark
+            <a href="{{ route('book.bookmark', [$book->slug, 'bookmark']) }}" class="btn btn-success btn-xs">Bookmark
             <i class="fa fa-bookmark-o"></i>
             </a>
 
-            <a href="{{ route('book.show', [$book->slug, 'downloads']) }}" class="btn btn-danger btn-xs">Download
+            <a href="{{ route('book.download', [$book->slug, 'download']) }}" class="btn btn-danger btn-xs">Download
             <i class="fa fa-cloud-download"></i>
             </a>
           </p>

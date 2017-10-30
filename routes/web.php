@@ -10,8 +10,8 @@ Route::get('/book-lists', 'GuestController@bookLists')->name('book.lists');
 Route::get('/', 'GuestController@index')->name('index');
 Route::middleware(['authbook'])->group(function () {
 	Route::get('/book/{slug}/{type}', 'GuestController@show')->name('book.show');
-	Route::get('/book/bookmark/{slug}/{type}', 'GuestController@show')->name('book.bookmark');
-	Route::get('/book/download/{slug}/{type}', 'GuestController@show')->name('book.download');
+	Route::get('/book/bookmark/{slug}/{type}', 'GuestController@bookmark')->name('book.bookmark');
+	Route::get('/book/download/{slug}/{type}', 'GuestController@download')->name('book.download');
 });
 
 #user route

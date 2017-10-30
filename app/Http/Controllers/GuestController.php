@@ -19,11 +19,29 @@ class GuestController extends Controller
     	return view('guest.book-lists');
     }
 
-    public function show($slug)
-    {
-    	$book = \App\Book::where('slug', $slug)->first();
+    public function show($slug, $type)
+    {   
+        // type is used in authbook middleware
 
-    	return view('guest.bookShow', compact('book'));
+        $book = \App\Book::where('slug', $slug)->firstOrFail();
+        $book->views()->attach(\Auth::user()->id);
+
+        return view('guest.bookShow', compact('book'));
+    }
+
+    public function bookmark($slug, $type)
+    {
+        // type is used in authbook middleware
+
+        $bookmark = new \App\Bookmark($slug);
+        $bookmark->save();
+
+        return back();
+    }
+
+    public function download($slug, $type)
+    {
+        
     }
 
 }

@@ -41,8 +41,10 @@ class Box
 
     private static function bookmarks()
     {
+        $bookmarks = \DB::table('book_user')->count();
+
     	return [
-    		'total' => 0,
+    		'total' => $bookmarks,
             'header' => 'Bookmarks',
             'route' => 'javascript:;',
             'color' => 'bg-green',
@@ -52,8 +54,10 @@ class Box
 
     private static function downloads()
     {
+        $downloads = \DB::table('book_download')->count();
+
     	return [
-    		'total' => 0,
+    		'total' => $downloads,
 	        'header' => 'Downloads',
 	        'route' => 'javascript:;',
 	        'color' => 'bg-red',

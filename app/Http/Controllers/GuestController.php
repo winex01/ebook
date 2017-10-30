@@ -22,11 +22,12 @@ class GuestController extends Controller
     public function show($slug, $type)
     {   
         // type is used in authbook middleware
+        if (\Auth::guard('web')->check()) {
+            $view = new \App\View($slug);
+            $view->save();
+        }
 
-        $view = new \App\View($slug);
-        $view->save();
-
-        $book = $view->book();
+        $book = \App\View::thisBook($slug);
 
         return view('guest.bookShow', compact('book'));
     }

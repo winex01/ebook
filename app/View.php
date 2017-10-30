@@ -18,14 +18,19 @@ class View
 
     public function book()
     {
-    	return \App\Book::where('slug', $this->slug)->firstOrFail();
+        return \App\Book::where('slug', $this->slug)->firstOrFail();
     }
 
     public function save()
     {
-    	// check if user already bookmark book
+        // check if user already bookmark book
         $this->book->views()->attach($this->user_id);
 
     }//end save
+
+    public static function thisBook($slug)
+    {
+    	return \App\Book::where('slug', $slug)->firstOrFail();
+    }
 
 }

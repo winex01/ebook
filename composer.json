@@ -37,12 +37,14 @@
         "laravel": {
             "providers": [
                 "Yajra\\DataTables\\DataTablesServiceProvider",
-                "Laracasts\\Flash\\FlashServiceProvider"
+                "Laracasts\\Flash\\FlashServiceProvider",
+                "Chumper\\Zipper\\ZipperServiceProvider"
             ],
 
             "aliases": {
                 "DataTables": "Yajra\\DataTables\\Facades\\DataTables",
-                "Flash": "Laracasts\\Flash\\Flash"
+                "Flash": "Laracasts\\Flash\\Flash",
+                "Zipper": "Chumper\\Zipper\\Zipper"
             }
         }
     },

@@ -23,8 +23,10 @@ class GuestController extends Controller
     {   
         // type is used in authbook middleware
 
-        $book = \App\Book::where('slug', $slug)->firstOrFail();
-        $book->views()->attach(\Auth::user()->id);
+        $view = new \App\View($slug);
+        $view->save();
+
+        $book = $view->book();
 
         return view('guest.bookShow', compact('book'));
     }
@@ -36,12 +38,16 @@ class GuestController extends Controller
         $bookmark = new \App\Bookmark($slug);
         $bookmark->save();
 
+
         return back();
     }
 
     public function download($slug, $type)
     {
-        
+        $download = new \App\Download($slug);
+        $download->save();
+
+        return back();        
     }
 
 }

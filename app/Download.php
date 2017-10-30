@@ -28,4 +28,8 @@ class Download
 
     }//end save
 
+    public static function booked()
+    {
+        
+    }
 }

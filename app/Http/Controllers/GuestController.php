@@ -34,19 +34,26 @@ class GuestController extends Controller
     public function bookmark($slug, $type)
     {
         // type is used in authbook middleware
-
-        $bookmark = new \App\Bookmark($slug);
-        $bookmark->save();
-
+        if (\Auth::guard('web')->check()) {
+            $bookmark = new \App\Bookmark($slug);
+            $bookmark->save();
+        }else {
+            flash()->overlay('Administrator cannot bookmark book.', 'System Message');
+        }
 
         return back();
     }
 
     public function download($slug, $type)
     {
-        $download = new \App\Download($slug);
-        $download->save();
 
+        if (\Auth::guard('web')->check()) {
+            $download = new \App\Download($slug);
+            $download->save();
+        }
+
+        \App\Download::booked();
+        
         return back();        
     }
 

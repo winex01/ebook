@@ -32,5 +32,20 @@ class AdminPagesController extends Controller
     {
         return view('admin.books');
     }
+
+    public function views()
+    {
+        return view('admin.views');
+    }
+
+    public function bookmars()
+    {
+        return 'this is bookmarks';
+    }
+
+    public function downloads()
+    {
+        return 'this is downloads';
+    }
     
 }

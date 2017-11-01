@@ -34,8 +34,11 @@ Route::prefix('admin')->group(function() {
 	Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 		
 	// sidebar nav
-	Route::get('/', 'AdminPagesController@index')->name('admin.dashboard');
+	Route::get('/downloads', 'AdminPagesController@downloads')->name('admin.downloads');
+	Route::get('/bookmarks', 'AdminPagesController@bookmarks')->name('admin.bookmarks');
+	Route::get('/views', 'AdminPagesController@views')->name('admin.views');
 	Route::get('/books', 'AdminPagesController@books')->name('admin.books');
+	Route::get('/', 'AdminPagesController@index')->name('admin.dashboard');
 	
 	// book
 	Route::get('/book/show/{slug}', 'AdminBookController@show');

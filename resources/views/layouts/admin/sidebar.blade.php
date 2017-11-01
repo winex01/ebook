@@ -37,7 +37,7 @@
         {{-- / dashboard module --}}
         
         {{-- manage books --}}
-        <li class="treeview @active('admin/books', 'active') @active('admin/book/show/*', 'active')">
+        <li class="treeview @active('admin/books', 'active') @active('admin/book/show/*', 'active') @active('admin/views', 'active')">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Manage Books</span>
             <span class="pull-right-container">
@@ -45,12 +45,22 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="@active('admin/books', 'active')"><a href="{{ route('admin.books') }}"><i class="fa fa-circle-o"></i> Book Lists</a></li>
+            <li class="@active('admin/books', 'active')"><a href="{{ route('admin.books') }}"><i class="fa fa-circle-o text-aqua">  </i> Book Lists</a>
+            </li>
+            <li class="@active('admin/views', 'active')"><a href="{{ route('admin.views') }}"><i class="fa fa-circle-o text-blue">  </i> Views</a>
+            </li>
+            <li class="@active('admin/bookmarks', 'active')"><a href="{{ route('admin.bookmarks') }}"><i class="fa fa-circle-o text-green">  </i> Bookmarks</a>
+            </li>
+            <li class="@active('admin/downloads', 'active')"><a href="{{ route('admin.downloads') }}"><i class="fa fa-circle-o text-red">  </i> Downloads</a>
+            </li>
           </ul>
         </li>
         {{-- / manage books --}}
 
+
          
+
+
         {{-- <li>
           <a href="../calendar.html">
             <i class="fa fa-calendar"></i> <span>Calendar</span>

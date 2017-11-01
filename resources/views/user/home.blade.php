@@ -27,6 +27,9 @@
         </div>
         <div class="box-body">
 
+          @include('flash::message')
+          @include('partials.flash-success')
+
           <table id="table-book" class="table table-bordered table-hover">
               <thead>
               <tr>
@@ -74,6 +77,7 @@
 {{-- / modal description --}}
 
 
+@include('partials.confirm-delete')
     <!-- /.content -->
 @endsection
 
@@ -106,5 +110,41 @@
 
       $('#modal-description').modal();
    }
+
+   // remove bookmarked confirmation
+   function confirmRemoveBookmark(book){
+      $('#btn-confirm-delete').val('delete-bookmark');
+      $('#hidden-field').val(book.id);
+      $html = 'Are you sure you want to remove <strong>'+book.title+'</strong> in your bookmarked?';
+
+      $('#modal-confirm-delete .modal-body p').html($html);
+      $('#modal-confirm-delete').modal();
+   }
+   // remove bookmarked
+   $('#btn-confirm-delete').click(function(event) {
+     /* Act on the event */
+     if ($(this).val() == 'delete-bookmark'){
+        $.ajax({
+          url: 'user/removeBookmark/'+ $('#hidden-field').val(),
+          type: 'GET',
+          success: function(data){
+
+              if (data.title) {
+
+                $('#modal-confirm-delete').modal('hide');
+                dataTableRefresh('#table-book');
+                printSuccessMsg(data.title, data.msg);
+
+              }
+
+          },
+          error: function(){
+            alert('whoops, something went wrong...');
+          }
+        });
+        
+     }
+   });
+
 </script>
 @endsection

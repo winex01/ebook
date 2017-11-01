@@ -40,7 +40,7 @@ $('#flash-success-x').click(function(event) {
 function printSuccessMsg(msg, type){
     $('#flash-success-body').text(msg + ' is ' + type + ' Successfully.');
     $('#flash-success').show();
-    $("#flash-success").fadeTo(4000, 500).slideUp(500, function(){
+    $("#flash-success").fadeTo(5000, 500).slideUp(500, function(){
         $("#flash-success").slideUp(500);
     });
 }

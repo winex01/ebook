@@ -37,10 +37,10 @@ class UserController extends Controller
                 return '
                     <div align="center">
                         <div class="btn-group"> 
-                            <a href="#" class="btn btn-xs btn-info"><i class="fa fa-search"></i> 
+                            <a href="javascript:;" class="btn btn-xs btn-info"><i class="fa fa-search"></i> 
                                 Read
                             </a>
-                            <a href="#" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> 
+                            <a href="javascript:;" onclick="confirmRemoveBookmark('.htmlentities($book).')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> 
                                 Remove
                             </a>
                         </div>
@@ -54,4 +54,24 @@ class UserController extends Controller
             ->rawColumns(['action', 'description'])
             ->make(true);
     }
+
+    public function removeBookmark($id)
+    {       
+            // find user logged id
+            $user = \App\User::findOrFail(\Auth::user()->id);
+            // detach book_id from users bookmarks
+            $user->bookmarks()->detach($id);
+
+            //get book title
+            $book = \App\Book::findOrFail($id);
+
+            $response = [
+                'title' => $book->title,
+                'msg' => 'removed from your bookmarked' 
+            ];
+            
+            return response()->json($response);
+
+    }
+
 }

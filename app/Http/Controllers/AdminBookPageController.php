@@ -46,7 +46,7 @@ class AdminBookPageController extends Controller
         $temp = $book->pages()->save($page);
 
         if($temp) {
-            $msg = 'New Page is added successfully!';
+            $msg = '<h4><i class="icon fa fa-check"></i> Success!</h4>New Page is added successfully!';
             flash($msg)->success();
         }
 
@@ -133,7 +133,7 @@ class AdminBookPageController extends Controller
 
             if ($moved && $saved) {
             
-                flash('Page is updated successfully!')->success();
+                flash('<h4><i class="icon fa fa-check"></i> Success!</h4>Page is updated successfully!')->success();
             }
         }
         

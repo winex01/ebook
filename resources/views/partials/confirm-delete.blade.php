@@ -7,6 +7,7 @@
         <h4 class="modal-title">System Message</h4>
       </div>
       <div class="modal-body">
+        <input type="hidden" id="hidden-field">
         <p>Are you sure you want to delete this <strong>permanently</strong>?</p>
       </div>
       <div class="modal-footer">

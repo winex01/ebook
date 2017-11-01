@@ -1,11 +1,15 @@
  <?php
 
+Route::get('/testing', function(){
+	// test here
+})->name('index');
+
+
 #auth route
 Auth::routes();
 
 
 #guest route
-Route::get('/testing', 'TestController@index')->name('index');
 Route::get('/book-lists', 'GuestController@bookLists')->name('book.lists');
 Route::get('/', 'GuestController@index')->name('index');
 Route::middleware(['authbook'])->group(function () {
@@ -14,10 +18,12 @@ Route::middleware(['authbook'])->group(function () {
 	Route::get('/book/download/{slug}/{type}', 'GuestController@download')->name('book.download');
 });
 
+
 #user route
 Route::get('/home', 'UserController@index')->name('home');
 Route::get('user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 Route::get('user/book', 'UserController@books');
+Route::get('user/removeBookmark/{id}', 'UserController@removeBookmark')->name('removed.bookmark');
 
 
 #admin routes

@@ -2,6 +2,9 @@
 
 Route::get('/testing', function(){
 	// test here
+
+	
+
 })->name('index');
 
 
@@ -39,8 +42,11 @@ Route::prefix('admin')->group(function() {
 	Route::get('/views', 'AdminPagesController@views')->name('admin.views');
 	Route::get('/books', 'AdminPagesController@books')->name('admin.books');
 	Route::get('/', 'AdminPagesController@index')->name('admin.dashboard');
+
+	// views
+
 	
-	// book
+	// books
 	Route::get('/book/show/{slug}', 'AdminBookController@show');
 	Route::delete('/book/delete/', 'AdminBookController@delete');
 	Route::post('/book/store', 'AdminBookController@store')->name('book.store');	

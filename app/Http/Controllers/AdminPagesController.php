@@ -41,7 +41,7 @@ class AdminPagesController extends Controller
     public function bookmarks()
     {
         return 'this is bookmarks';
-    }
+    }   
 
     public function downloads()
     {

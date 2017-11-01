@@ -33,18 +33,13 @@
           {{-- flash message here --}}
           @include('partials.flash-success')
 
-            <a id="add-book" class="btn btn-default" data-toggle="modal" href='#modal-book'>
-              <i class="fa fa-plus-circle"></i> Add Book
-            </a>
 
-
-            <table id="table-book" class="table table-bordered table-hover">
+            <table id="table-views" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th><center>Action</center></th>
+                  <th>User</th>
+                  <th>Book Viewed</th>
+                  <th>Date & Time</th>
                 </tr>
                 </thead>
 
@@ -77,7 +72,7 @@
 
 // // display book tables
 //  $(function() {
-//       var table = $('#table-book').DataTable({
+//       var table = $('#table-views').DataTable({
 //           processing: true,
 //           serverSide: true,
 //           ajax: url + 'all',

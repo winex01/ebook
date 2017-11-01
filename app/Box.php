@@ -33,7 +33,7 @@ class Box
         return [
             'total' => $totalViews,
             'header' => 'Book Views',
-            'route' => 'javascript:;',
+            'route' => route('admin.views'),
             'color' => 'bg-primary',
             'icon' => 'ion ion-eye'  
         ];
@@ -46,7 +46,7 @@ class Box
     	return [
     		'total' => $bookmarks,
             'header' => 'Bookmarks',
-            'route' => 'javascript:;',
+            'route' => route('admin.bookmarks'),
             'color' => 'bg-green',
             'icon' => 'ion ion-bookmark'  
     	];
@@ -59,7 +59,7 @@ class Box
     	return [
     		'total' => $downloads,
 	        'header' => 'Downloads',
-	        'route' => 'javascript:;',
+	        'route' => route('admin.downloads'),
 	        'color' => 'bg-red',
 	        'icon' => 'ion ion-pie-graph'
     	];

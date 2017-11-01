@@ -30,7 +30,7 @@
               </div>
         </div>
         <div class="col-lg-9 col-md-9">
-         <h4><a href="#" class="text-info">{{ $book->title }}</a></h4>
+         <h4><a href="{{ route('book.show', [$book->slug, 'view']) }}" class="text-info">{{ $book->title }}</a></h4>
 
           <p>
             @php($link = '<a href="#modal-show-description" data-toggle="modal"> (...)</a>')

@@ -38,7 +38,7 @@ class AdminPagesController extends Controller
         return view('admin.views');
     }
 
-    public function bookmars()
+    public function bookmarks()
     {
         return 'this is bookmarks';
     }

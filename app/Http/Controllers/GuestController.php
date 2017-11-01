@@ -22,14 +22,18 @@ class GuestController extends Controller
     public function show($slug, $type)
     {   
         // type is used in authbook middleware
+
+        // if user is login not admin
         if (\Auth::guard('web')->check()) {
+            // save views
             $view = new \App\View($slug);
             $view->save();
         }
 
         $book = \App\View::thisBook($slug);
+        $pages = \App\Page::where('book_id', $book->id)->paginate(1);
 
-        return view('guest.bookShow', compact('book'));
+        return view('guest.bookShow', compact('book', 'pages'));
     }
 
     public function bookmark($slug, $type)

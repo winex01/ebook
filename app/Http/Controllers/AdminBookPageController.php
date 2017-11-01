@@ -119,8 +119,12 @@ class AdminBookPageController extends Controller
             
             // if validation success
             $uploadPath = 'uploads/page';
-            $fileName = time().uniqid().'.'; 
-            $fileExtension = $request->file->getClientOriginalExtension();
+            // remove path from $page->page
+            $fileName = str_replace('uploads/page/', '', $page->page);
+            $fileName = explode('.', $fileName);
+            // remove extension from filename
+            $fileName = $fileName[0].'1';
+            $fileExtension = '.'.$request->file->getClientOriginalExtension();
             // store uploaded files in upload/
             $moved = $request->file->move(public_path($uploadPath), $fileName.$fileExtension);
 

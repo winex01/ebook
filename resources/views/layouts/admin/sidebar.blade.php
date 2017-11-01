@@ -37,7 +37,7 @@
         {{-- / dashboard module --}}
         
         {{-- manage books --}}
-        <li class="treeview @active('admin/books', 'active') @active('admin/book/show/*', 'active') @active('admin/views', 'active')">
+        <li class="treeview @active('admin/books', 'active') @active('admin/book/show/*', 'active') @active('admin/views', 'active') @active('admin/bookmars', 'active') @active('admin/downloads', 'active')">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Manage Books</span>
             <span class="pull-right-container">

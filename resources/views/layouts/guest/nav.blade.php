@@ -19,12 +19,12 @@
               </a>
             </li>
             
-            <li class="@active('book-lists', 'active')">
+{{--             <li class="@active('book-lists', 'active')">
               <a href="{{ route('book.lists') }}">
                 <i class="fa fa-list"></i>
                 Book List
               </a>
-            </li>
+            </li> --}}
 
             
           </ul>

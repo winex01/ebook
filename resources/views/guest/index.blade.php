@@ -33,7 +33,7 @@
          <h4><a href="#" class="text-info">{{ $book->title }}</a></h4>
 
           <p>
-            @php($link = '<a href="javascript:;"> (...)</a>')
+            @php($link = '<a href="#modal-show-description" data-toggle="modal"> (...)</a>')
             {!! str_limit($book->description, 500, $link) !!}
           </p>
 
@@ -73,6 +73,25 @@
     </div>
   {{-- / pagination --}}
   
+
+
+<div class="modal fade" id="modal-show-description">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>{{ $book->title }}</strong></h4>
+      </div>
+      <div class="modal-body">
+          <p>{{ $book->description }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   {{-- / content --}}
 @endsection

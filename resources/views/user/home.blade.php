@@ -27,12 +27,19 @@
         </div>
         <div class="box-body">
 
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <table id="table-book" class="table table-bordered table-hover">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th><center>Action</center></th>
+              </tr>
+              </thead>
+
+              <tbody>
+              </tbody>
+          </table>
 
         </div>
         <!-- /.box-body -->
@@ -44,5 +51,60 @@
       <!-- /.box -->
 
     </section>
+
+
+
+{{-- modal description --}}
+<div class="modal fade" id="modal-description">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong id="desc-title"></strong></h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- / modal description --}}
+
+
     <!-- /.content -->
+@endsection
+
+@section('script')
+<script type="text/javascript">
+
+  // display user bookmarks tables
+   $(function() {
+        var table = $('#table-book').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: 'user/book',
+            columnDefs: [
+              { "width": "50%", "targets": 2 }
+            ],
+            columns: [
+                {data: 'id'},
+                {data: 'title'},
+                {data: 'description'},
+                {data: 'action'},
+            ]
+        });
+    }); //end dready
+
+   function readDescription(book){
+
+      // console.log(book);
+      $('#modal-description .modal-title #desc-title').text(book.title);
+      $('#modal-description .modal-body').text(book.description);
+
+      $('#modal-description').modal();
+   }
+</script>
 @endsection

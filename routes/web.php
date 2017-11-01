@@ -17,7 +17,7 @@ Route::middleware(['authbook'])->group(function () {
 #user route
 Route::get('/home', 'UserController@index')->name('home');
 Route::get('user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
-
+Route::get('user/book', 'UserController@books');
 
 
 #admin routes

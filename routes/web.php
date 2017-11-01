@@ -3,9 +3,19 @@
 Route::get('/testing', function(){
 	// test here
 
-	
+	// $users =  \App\User::has('views');
 
-})->name('index');
+	// dd($users->pluck('name'));
+
+	$views = \DB::table('book_view')
+				->join('users', 'users.id', '=', 'book_view.user_id')
+				->join('books', 'books.id', '=', 'book_view.book_id')
+				->select('users.name', 'books.title', 'book_view.created_at')
+				->get();
+
+	dd($views);
+
+});
 
 
 #auth route
@@ -44,7 +54,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/', 'AdminPagesController@index')->name('admin.dashboard');
 
 	// views
-
+	Route::get('/views/all', 'AdminViewsController@all');
 	
 	// books
 	Route::get('/book/show/{slug}', 'AdminBookController@show');

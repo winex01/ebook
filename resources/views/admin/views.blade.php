@@ -39,7 +39,7 @@
                 <tr>
                   <th>User</th>
                   <th>Book Viewed</th>
-                  <th>Date & Time</th>
+                  <th>Date / Time</th>
                 </tr>
                 </thead>
 
@@ -70,23 +70,22 @@
 <script type="text/javascript">
 
 
-// // display book tables
-//  $(function() {
-//       var table = $('#table-views').DataTable({
-//           processing: true,
-//           serverSide: true,
-//           ajax: url + 'all',
-//           columnDefs: [
-//             { "width": "50%", "targets": 2 }
-//           ],
-//           columns: [
-//               {data: 'id'},
-//               {data: 'title'},
-//               {data: 'description'},
-//               {data: 'action'},
-//           ]
-//       });
-//   }); //end dready
+// display book tables
+ $(function() {
+      var table = $('#table-views').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: '/admin/views/all',
+          // columnDefs: [
+          //   { "width": "50%", "targets": 2 }
+          // ],
+          columns: [
+              {data: 'name'},
+              {data: 'title'},
+              {data: 'created_at'},
+          ]
+      });
+  }); //end dready
 
 
 </script>

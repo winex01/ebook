@@ -17,7 +17,7 @@
           <ol class="breadcrumb">
             <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
             <li><a href="{{ route('admin.books') }}">Manage Books</a></li>
-            <li class="@active('admin/views', 'active')">Views</li>
+            <li class="@active('admin/bookmarks', 'active')">Bookmarks</li>
           </ol>
           {{-- / brandcramps --}}
 
@@ -34,12 +34,12 @@
           @include('partials.flash-success')
 
 
-            <table id="table-views" class="table table-bordered table-hover">
+            <table id="table-bookmarks" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>ID</th>
                   <th>User</th>
-                  <th>Book Viewed</th>
+                  <th>Bookmark</th>
                   <th>Date / Time</th>
                 </tr>
                 </thead>
@@ -73,10 +73,10 @@
 
 // display book tables
  $(function() {
-      var table = $('#table-views').DataTable({
+      var table = $('#table-bookmarks').DataTable({
           processing: true,
           serverSide: true,
-          ajax: '/admin/views/all',
+          ajax: '/admin/bookmarks/all',
           order: [ [0, 'desc'] ],
           columns: [
               {data: 'id'},

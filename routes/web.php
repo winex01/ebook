@@ -7,10 +7,11 @@ Route::get('/testing', function(){
 
 	// dd($users->pluck('name'));
 
-	$views = \DB::table('book_view')
-				->join('users', 'users.id', '=', 'book_view.user_id')
-				->join('books', 'books.id', '=', 'book_view.book_id')
-				->select('users.name', 'books.title', 'book_view.created_at')
+	$views = \DB::table('book_user')
+				->select('book_user.id', 'users.name', 'books.title', 'book_user.created_at')
+				->join('users', 'users.id', '=', 'book_user.user_id')
+				->join('books', 'books.id', '=', 'book_user.book_id')
+				->orderBy('book_user.id' , 'desc')
 				->get();
 
 	dd($views);
@@ -55,6 +56,10 @@ Route::prefix('admin')->group(function() {
 
 	// views
 	Route::get('/views/all', 'AdminViewsController@all');
+	// bookmarks
+	Route::get('/bookmarks/all', 'AdminBookmarksController@all');
+	// download
+	Route::get('/downloads/all', 'AdminDownloadsController@all');
 	
 	// books
 	Route::get('/book/show/{slug}', 'AdminBookController@show');

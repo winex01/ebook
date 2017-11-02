@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class AdminViewsController extends Controller
+class AdminBookmarksController extends Controller
 {
     //
-	public function all()
+    public function all()
 	{
-		$views = \DB::table('book_view')
-				->select('book_view.id', 'users.name', 'books.title', 'book_view.created_at')
-				->join('users', 'users.id', '=', 'book_view.user_id')
-				->join('books', 'books.id', '=', 'book_view.book_id')
-				->orderBy('book_view.id' , 'desc')
+		$views = \DB::table('book_user')
+				->select('book_user.id', 'users.name', 'books.title', 'book_user.created_at')
+				->join('users', 'users.id', '=', 'book_user.user_id')
+				->join('books', 'books.id', '=', 'book_user.book_id')
+				->orderBy('book_user.id' , 'desc')
 				->get();
 
 		return \DataTables::of($views)
@@ -27,6 +27,4 @@ class AdminViewsController extends Controller
 				// ->rawColumns(['created_at'])
 				->make();
 	}
-
-
 }

@@ -40,12 +40,12 @@ class AdminPagesController extends Controller
 
     public function bookmarks()
     {
-        return 'this is bookmarks';
+        return view('admin.bookmarks');
     }   
 
     public function downloads()
     {
-        return 'this is downloads';
+        return view('admin.downloads');
     }
     
 }

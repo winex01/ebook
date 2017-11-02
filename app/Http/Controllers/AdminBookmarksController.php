@@ -10,19 +10,19 @@ class AdminBookmarksController extends Controller
     //
     public function all()
 	{
-		$views = \DB::table('book_user')
+		$bookmarks = \DB::table('book_user')
 				->select('book_user.id', 'users.name', 'books.title', 'book_user.created_at')
 				->join('users', 'users.id', '=', 'book_user.user_id')
 				->join('books', 'books.id', '=', 'book_user.book_id')
 				->orderBy('book_user.id' , 'desc')
 				->get();
 
-		return \DataTables::of($views)
-				->editColumn('name', function($view){
-					return ucwords($view->name);
+		return \DataTables::of($bookmarks)
+				->editColumn('name', function($bookmark){
+					return ucwords($bookmark->name);
 				})
-				->editColumn('created_at', function($view){
-					return Carbon::parse($view->created_at)->diffForHumans();
+				->editColumn('created_at', function($bookmark){
+					return Carbon::parse($bookmark->created_at)->diffForHumans();
 				})
 				// ->rawColumns(['created_at'])
 				->make();

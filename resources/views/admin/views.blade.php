@@ -79,6 +79,7 @@
           // columnDefs: [
           //   { "width": "50%", "targets": 2 }
           // ],
+          order: [ [2, 'asc'] ],
           columns: [
               {data: 'name'},
               {data: 'title'},

@@ -7,14 +7,14 @@ Route::get('/testing', function(){
 
 	// dd($users->pluck('name'));
 
-	$views = \DB::table('book_user')
-				->select('book_user.id', 'users.name', 'books.title', 'book_user.created_at')
-				->join('users', 'users.id', '=', 'book_user.user_id')
-				->join('books', 'books.id', '=', 'book_user.book_id')
-				->orderBy('book_user.id' , 'desc')
-				->get();
+	// $views = \DB::table('book_user')
+	// 			->select('book_user.id', 'users.name', 'books.title', 'book_user.created_at')
+	// 			->join('users', 'users.id', '=', 'book_user.user_id')
+	// 			->join('books', 'books.id', '=', 'book_user.book_id')
+	// 			->orderBy('book_user.id' , 'desc')
+	// 			->get();
 
-	dd($views);
+	// dd($views);
 
 });
 

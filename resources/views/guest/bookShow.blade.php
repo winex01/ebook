@@ -7,7 +7,6 @@
 	
 
 <center>
-	
 	{{ $pages->links() }}
 
 	<div class="container-fluid">

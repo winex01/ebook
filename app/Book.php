@@ -32,4 +32,19 @@ class Book extends Model
     {
         return $this->belongsToMany(User::class, 'book_download')->withTimestamps();
     }
+
+    public static function mostViewed($top = 10)
+    {
+        return \DB::table('book_view')
+                ->select(
+                        'book_view.book_id',
+                        'books.title', 
+                        \DB::raw('COUNT(book_view.book_id) as total_views')
+                )
+                ->join('books', 'book_view.book_id', '=', 'books.id')
+                ->groupBy('book_view.book_id')
+                ->orderBy('total_views', 'desc')
+                ->limit($top)
+                ->get();
+    }
 }

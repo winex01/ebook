@@ -74,7 +74,7 @@
   {{-- / pagination --}}
   
 
-
+@isset($book)
 <div class="modal fade" id="modal-show-description">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -91,6 +91,7 @@
     </div>
   </div>
 </div>
+@endisset
 
 
   {{-- / content --}}

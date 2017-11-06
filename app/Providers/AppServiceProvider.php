@@ -25,8 +25,8 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.guest.master', function($view)
         {
             $view->with('mostViewed', \App\Book::mostViewed());
-            $view->with('mostBookmark', 'myvariable');
-            $view->with('mostDownload', 'myvariable');
+            $view->with('mostBookmark', \App\Book::mostBookmark());
+            $view->with('mostDownload', \App\Book::mostDownload());
         });
 
 

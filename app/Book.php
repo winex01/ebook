@@ -47,4 +47,34 @@ class Book extends Model
                 ->limit($top)
                 ->get();
     }
+
+    public static function mostBookmark($top = 10)
+    {
+        return \DB::table('book_user')
+                ->select(
+                        'book_user.book_id',
+                        'books.title', 
+                        \DB::raw('COUNT(book_user.book_id) as total_bookmarks')
+                )
+                ->join('books', 'book_user.book_id', '=', 'books.id')
+                ->groupBy('book_user.book_id')
+                ->orderBy('total_bookmarks', 'desc')
+                ->limit($top)
+                ->get();
+    }
+
+    public static function mostDownload($top = 10)
+    {
+        return \DB::table('book_download')
+                ->select(
+                        'book_download.book_id',
+                        'books.title', 
+                        \DB::raw('COUNT(book_download.book_id) as total_downloads')
+                )
+                ->join('books', 'book_download.book_id', '=', 'books.id')
+                ->groupBy('book_download.book_id')
+                ->orderBy('total_downloads', 'desc')
+                ->limit($top)
+                ->get();
+    }
 }

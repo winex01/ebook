@@ -23,7 +23,9 @@
                   </div>
                   <div class="col-lg-3 col-md-3">
                       {{-- most viewed --}}
-                      @include('layouts.guest.mostViewed', compact($mostViewed, $mostBookmark, $mostDownload))
+                      @include('layouts.guest.mostViewed', compact($mostViewed))
+                      @include('layouts.guest.mostBookmark', compact($mostBookmark))
+                      @include('layouts.guest.mostDownload', compact($mostDownload))
                   </div>
               </div>
 

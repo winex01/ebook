@@ -5,7 +5,7 @@ Route::get('/testing', function(){
 
 
 
-	dd(\App\Book::mostViewed());
+	dd(\App\Book::mostDownload());
 
 
 

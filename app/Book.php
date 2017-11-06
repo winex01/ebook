@@ -39,6 +39,7 @@ class Book extends Model
                 ->select(
                         'book_view.book_id',
                         'books.title', 
+                        'books.slug',
                         \DB::raw('COUNT(book_view.book_id) as total_views')
                 )
                 ->join('books', 'book_view.book_id', '=', 'books.id')
@@ -54,6 +55,7 @@ class Book extends Model
                 ->select(
                         'book_user.book_id',
                         'books.title', 
+                        'books.slug',
                         \DB::raw('COUNT(book_user.book_id) as total_bookmarks')
                 )
                 ->join('books', 'book_user.book_id', '=', 'books.id')
@@ -69,6 +71,7 @@ class Book extends Model
                 ->select(
                         'book_download.book_id',
                         'books.title', 
+                        'books.slug', 
                         \DB::raw('COUNT(book_download.book_id) as total_downloads')
                 )
                 ->join('books', 'book_download.book_id', '=', 'books.id')

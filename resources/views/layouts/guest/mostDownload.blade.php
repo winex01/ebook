@@ -3,7 +3,7 @@
 	    <h4>Most Downloaded</h4>
 	    <ol>
 	        @foreach($mostDownload as $book)
-	            <li><a href="#"> {{ $book->title }}</a></li>
+	            <li><a href="{{ route('book.show', [$book->slug, 'download']) }}"> {{ $book->title }}</a></li>
 
 	        @endforeach
 	    </ol>

@@ -37,7 +37,7 @@ class UserController extends Controller
                 return '
                     <div align="center">
                         <div class="btn-group"> 
-                            <a href="'.route('book.show', [$book->slug, 'views']).'" class="btn btn-xs btn-info"><i class="fa fa-check"></i> 
+                            <a href="'.route('book.show', [$book->slug, 'view']).'" class="btn btn-xs btn-info"><i class="fa fa-check"></i> 
                                 Read
                             </a>
                             <a href="javascript:;" onclick="confirmRemoveBookmark('.htmlentities($book).')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> 

@@ -23,7 +23,7 @@
                   </div>
                   <div class="col-lg-3 col-md-3">
                       {{-- most viewed --}}
-                      @include('layouts.guest.mostViewed')
+                      @include('layouts.guest.mostViewed', compact($mostViewed, $mostBookmark, $mostDownload))
                   </div>
               </div>
 

@@ -1,14 +1,19 @@
 <div class="panel panel-default">
   <div class="panel-body">
 
-		<div class="input-group margin">
-            <input type="text" class="form-control">
+      <form method="POST" action="search/submit">
+        {{ csrf_field() }}
+  
+        <div class="input-group margin">
+            <input id="search-bar" name="search" type="text" class="form-control">
             <span class="input-group-btn">
-              <button type="button" class="btn btn-default">Search
+              <button type="submit" class="btn btn-default">Search
               <i class="fa fa-search"></i>
               </button>
             </span>
-         </div>
+        </div>
+
+    </form>
 
   </div>
 </div>

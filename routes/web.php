@@ -1,15 +1,8 @@
  <?php
 
-Route::get('/testing', function(){
-
-
-
-
-	dd(\App\Book::mostViewed());
-
-
-
-
+// fore testing
+Route::get('testing', function(){
+	
 });
 
 
@@ -18,6 +11,9 @@ Auth::routes();
 
 
 #guest route
+Route::get('search/autocomplete', 'SearchBarController@autocomplete');
+Route::post('search/submit', 'SearchBarController@submit');
+
 Route::get('/book-lists', 'GuestController@bookLists')->name('book.lists');
 Route::get('/', 'GuestController@index')->name('index');
 Route::middleware(['authbook'])->group(function () {

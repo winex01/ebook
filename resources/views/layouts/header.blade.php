@@ -29,4 +29,7 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ url('adminlte/dist/css/skins/_all-skins.min.css') }}">
 
+  {{-- searh bar ui --}}
+  <link rel="stylesheet" href="{{ url('css/searchbar.css') }}">
+
 </head>

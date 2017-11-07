@@ -24,3 +24,13 @@
 <!-- AdminLTE for demo purposes -->
 {{-- <script src="{{ url('adminlte/dist/js/demo.js') }}"></script> --}}
 
+{{-- search bar autocomplete --}}
+<script src="{{ url('js/jquery-ui.js') }}"></script>
+
+<script type="text/javascript">
+	$(function() {
+	  $("#search-bar").autocomplete({
+	    source: '{{ url('search/autocomplete') }}',
+	  });
+	});
+</script>

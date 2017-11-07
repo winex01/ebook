@@ -9,7 +9,7 @@ class GuestController extends Controller
 {
     public function index()
     {
-    	$books = \App\Book::paginate(4);
+    	$books = \App\Book::latest()->paginate(4);
 
     	return view('guest.index', compact('books'));
     }

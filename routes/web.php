@@ -63,5 +63,8 @@ Route::prefix('admin')->group(function() {
 	Route::get('/page/all/{id}', 'AdminBookPageController@all');	
 	Route::delete('/page/delete/{page}', 'AdminBookPageController@delete');
 	Route::patch('/page/update/', 'AdminBookPageController@update');
+
+	// users
+	Route::resource('users', 'UsersController');
 });
 

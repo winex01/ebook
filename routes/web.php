@@ -65,6 +65,7 @@ Route::prefix('admin')->group(function() {
 	Route::patch('/page/update/', 'AdminBookPageController@update');
 
 	// users
+	Route::get('users/all', 'UsersController@all')->name('users.all');
 	Route::resource('users', 'UsersController');
 });
 

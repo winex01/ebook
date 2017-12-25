@@ -38,12 +38,12 @@
 
             {{  Session::get('insert_user') }}
 
-            <table id="table-user" class="table table-bordered table-hover">
+            <table id="table-users" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>Description</th>
+                  <th>Name</th>
+                  <th>Username</th>
+                  <th>Created</th>
                   <th><center>Action</center></th>
                 </tr>
                 </thead>
@@ -154,6 +154,23 @@
     $('#modal-user').modal();
   @endif
    
+
+   $(function() {
+        var table = $('#table-users').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route('users.all') }}',
+            // columnDefs: [
+            //   { "width": "50%", "targets": 2 }
+            // ],
+            columns: [
+                {data: 'name'},
+                {data: 'username'},
+                {data: 'created_at'},
+                {data: 'action'},
+            ]
+        });
+    });
 
 </script>
 @endsection

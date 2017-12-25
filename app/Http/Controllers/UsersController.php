@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Validator;
+use DataTables;
 
 class UsersController extends Controller
 {
@@ -102,5 +103,22 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function all()
+    {
+        $user = User::select(['name', 'username', 'created_at']);
+        return DataTables::of($user)->addColumn('action', function ($user) {
+                return '
+                    <div align="center">
+                        <div class="btn-group"> 
+                            <a href="#" class="btn btn-xs btn-info"><i class="fa fa-search"></i> Select</a>
+                            <button onclick="editUser('.htmlentities($user).')" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
+                            <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                        </div>
+                    </div>
+                ';
+            })
+            ->make(true);
     }
 }

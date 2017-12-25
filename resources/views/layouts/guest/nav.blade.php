@@ -65,12 +65,12 @@
                   </a>
               </li>
               
-              <li class="@active('register', 'active')">
+              {{-- <li class="@active('register', 'active')">
                   <a href="{{ url('register') }}">
                     <i class="fa fa-user"></i>
                     Signup 
                   </a>
-              </li>
+              </li> --}}
             @endif
 
           </ul>

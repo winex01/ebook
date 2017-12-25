@@ -10,13 +10,18 @@ class Book extends Model
 
 	public function pages()
 	{
-		return $this->hasMany(Page::class);
-	}
+        return $this->hasMany(Page::class);
+    }
 
-	public function cover()
-	{
-		return $this->pages()->first();
-	}
+    public function cover()
+    {
+        return $this->pages()->first();
+    }
+
+    public function tags()
+    {
+		return $this->hasMany(Tag::class);
+    }
 
     public function views()
     {

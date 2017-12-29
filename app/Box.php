@@ -70,7 +70,7 @@ class Box
     	return [
     		'total' => \App\User::count(),
 	        'header' => 'User Registrations',
-	        'route' => 'javascript:;',
+            'route' => route('users.index'),
 	        'color' => 'bg-yellow',
 	        'icon' => 'ion ion-person-add'  
     	];

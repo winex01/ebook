@@ -24,11 +24,12 @@
                 </center>
               @endif
               <div align="center">
-                <span class="label label-primary" data-toggle="tooltip" title="Views"><i class="fa fa-eye"></i> {{ sprintf("%03d", $book->views()->count()) }}</span>
-                <span class="label label-success" data-toggle="tooltip" title="Bookmarks"><i class="fa fa-bookmark-o"></i> {{ sprintf("%03d", $book->bookmarks()->count()) }}</span>
-                <span class="label label-danger" data-toggle="tooltip" title="Downloads"><i class="fa fa-cloud-download"></i> {{ sprintf("%03d", $book->downloads()->count()) }}</span>
+                <span class="label label-primary" data-toggle="tooltip" title=""><i class="fa fa-eye"></i> {{ sprintf("%03d", $book->views()->count()) }}</span>
+                <span class="label label-success" data-toggle="tooltip" title=""><i class="fa fa-bookmark-o"></i> {{ sprintf("%03d", $book->bookmarks()->count()) }}</span>
+                <span class="label label-danger" data-toggle="tooltip" title=""><i class="fa fa-cloud-download"></i> {{ sprintf("%03d", $book->downloads()->count()) }}</span>
               </div>
         </div>
+        
         <div class="col-lg-9 col-md-9">
          <h4><a href="{{ route('book.show', [$book->slug, 'view']) }}" class="text-info">{{ $book->title }} <sub class="text-success">{{ $book->created_at->diffForHumans() }}</sub></a></h4>
 

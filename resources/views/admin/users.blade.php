@@ -142,6 +142,66 @@
 
 
 
+
+{{-- update --}}
+<div class="modal fade" id="modal-update-user">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Edit User</h4>
+      </div>
+      <div class="modal-body">
+          @include('partials.flash-error')
+
+          <form class="form-horizontal">
+
+            <div class="form-group{{ $errors->has('editName') ? ' has-error' : '' }}">
+                <label for="editName" class="col-md-4 control-label">Name</label>
+
+                <div class="col-md-6">
+                    <input id="editName" type="text" class="form-control" name="editName" value="{{ old('editName') }}" required autofocus>
+
+                    @if ($errors->has('editName'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('editName') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('editUsername') ? ' has-error' : '' }}">
+                <label for="editUsername" class="col-md-4 control-label">Username</label>
+
+                <div class="col-md-6">
+                    <input id="editUsername" type="text" class="form-control" name="editUsername" value="{{ old('editUsername') }}" required>
+
+                    @if ($errors->has('editUsername'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('editUsername') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-4">
+                    <button id="updateUser" type="submit" class="btn btn-primary">
+                        Update
+                    </button>
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
     @include('partials.confirm-delete')
 
 @endsection
@@ -177,7 +237,7 @@
       $('#modal-confirm-delete .modal-title').html('System Message');
       $('#modal-confirm-delete .modal-body p').html('Are you sure you want to delete <strong>' + row.name + '</strong>?');
       $('#modal-confirm-delete').modal();
-      console.log(row);
+      // console.log(row);
       id = row.id;
   }
   $('#btn-confirm-delete').click(function(event) {
@@ -204,6 +264,46 @@
         });
 
   });
+
+  function editUser(row){
+    $('#updateUser').val(row.id);
+    $('#editName').val(row.name);
+    $('#editUsername').val(row.username);
+     $('#modal-update-user').modal();
+  }
+
+  $('#updateUser').on('click', function(event) {
+    event.preventDefault();
+    /* Act on the event */
+      $.ajax({
+            type: "PATCH",
+            url: '/admin/users/' + $('#updateUser').val(),
+            data: {
+              name : $('#editName').val(),
+              username: $('#editUsername').val()
+            },
+            success: function (data) {
+                
+                console.log(data);
+
+                if(data.status == 'duplicate') {
+                  var arr = [data.status + ' username.'];
+                  printErrorMsg(arr);
+                }else{
+                  dataTableRefresh('#table-users');
+                  printSuccessMsg(data.title, 'Updated');
+                  $('#modal-update-user').modal('hide');  
+                }
+                
+
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+
+        });
+  });
+
 
 
 </script>

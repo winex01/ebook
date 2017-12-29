@@ -89,9 +89,20 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        //check if id is uniq
+        $check = User::where('username', $request->username)->where('id', '!=', $user->id)->count();
+
+        if($check > 0) {
+            return response()->json(['status' => 'duplicate']);            
+        }
+
+        $user->name = ucwords($request->name);
+        $user->username = $request->username;
+        $user->save();
+
+        return response()->json(['title' => 'User']);
     }
 
     /**

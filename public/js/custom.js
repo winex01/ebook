@@ -45,3 +45,10 @@ function printSuccessMsg(msg, type){
     });
 }
 // ------------------------------------------------------------------------------
+function printDangerMsg(msg, type){
+    $('#flash-success-body').text(msg);
+    $('#flash-success').show();
+    $("#flash-success").fadeTo(5000, 500).slideUp(500, function(){
+        $("#flash-success").slideUp(500);
+    });
+}

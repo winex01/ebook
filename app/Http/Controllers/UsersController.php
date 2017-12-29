@@ -100,21 +100,23 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
+        User::destroy($user->id);
+
+        return response()->json(['title' => $user->name]);
     }
 
     public function all()
     {
-        $user = User::select(['name', 'username', 'created_at']);
+        $user = User::select(['id', 'name', 'username', 'created_at']);
         return DataTables::of($user)->addColumn('action', function ($user) {
                 return '
                     <div align="center">
                         <div class="btn-group"> 
-                            <a href="#" class="btn btn-xs btn-info"><i class="fa fa-search"></i> Select</a>
                             <button onclick="editUser('.htmlentities($user).')" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</button>
-                            <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                            <button onclick="deleteUser('.htmlentities($user).')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
                         </div>
                     </div>
                 ';

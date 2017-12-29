@@ -172,6 +172,40 @@
         });
     });
 
+   var id;
+   function deleteUser(row) {
+      $('#modal-confirm-delete .modal-title').html('System Message');
+      $('#modal-confirm-delete .modal-body p').html('Are you sure you want to delete <strong>' + row.name + '</strong>?');
+      $('#modal-confirm-delete').modal();
+      console.log(row);
+      id = row.id;
+  }
+  $('#btn-confirm-delete').click(function(event) {
+        /* Act on the event */
+        $.ajax({
+            type: "DELETE",
+            url: '/admin/users/' + id,
+            // data: {
+            //   id : id
+            // },
+            success: function (data) {
+                
+                console.log(data);
+
+                $('#modal-confirm-delete').modal('hide');
+                dataTableRefresh('#table-users');
+                printSuccessMsg(data.title, 'Deleted');
+
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+
+        });
+
+  });
+
+
 </script>
 @endsection
 

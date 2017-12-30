@@ -67,5 +67,9 @@ Route::prefix('admin')->group(function() {
 	// users
 	Route::get('users/all', 'UsersController@all')->name('users.all');
 	Route::resource('users', 'UsersController');
+
+	// index/indices
+	Route::get('index/all/{id}', 'IndexController@all')->name('index.all');
+	Route::resource('index', 'IndexController');	
 });
 

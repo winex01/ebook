@@ -13,6 +13,11 @@ class Book extends Model
         return $this->hasMany(Page::class);
     }
 
+    public function indices()
+    {
+        return $this->hasMany(Index::class);
+    }
+
     public function cover()
     {
         return $this->pages()->first();

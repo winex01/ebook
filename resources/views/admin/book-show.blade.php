@@ -48,9 +48,11 @@
                       @if(count($pages) > 0)
                         <div class="pull-right">
                           <div class="btn-group">
+                            <a href="#modal-page-index"  data-toggle="modal" class="btn btn-default"><i class="fa fa-plus"></i> Index</a>
+                            <a href="#modal-indices"  data-toggle="modal" class="btn btn-default"><i class="fa fa-eye"></i> Indices</a>
                             <a href="#modal-page-update"  data-toggle="modal" class="btn btn-default"><i class="fa fa-edit"></i>Edit</a>
                             {{-- delete --}}
-                            <a data-toggle="modal" href="#modal-confirm-delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                            <a data-toggle="modal" href="#modal-confirm-delete" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
                           </div>
                         </div>
                         <hr>
@@ -206,72 +208,134 @@
 @endsection
 
 
+{{-- index --}}
+<div class="modal fade" id="modal-page-index">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Index</h4>
+      </div>
+      <div class="modal-body">
+          <form class="form-horizontal" method="POST" action="{{ route('index.store') }}">
+           
+            {{ csrf_field() }}
+
+            <input type="hidden" name="book_id" value="{{ $book['id'] }}">
+            <input type="hidden" name="page" value="{{ $pages->currentPage() }}">
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="index">Description:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="description" name="description" placeholder="Enter index description" required>
+              </div>
+            </div>
+            <div class="form-group"> 
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+              </div>
+            </div>
+
+          </form>
+
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- indices --}}
+<div class="modal fade" id="modal-indices">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Indices</h4>
+      </div>
+      <div class="modal-body">
+        <table id="table-indices" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Page</th>
+                <th><center>Action</center></th>
+              </tr>
+              </thead>
+
+              <tbody>
+              </tbody>
+          </table>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>\
+
+
+
+
+@include('partials.confirm-delete')
+
 
 @section('script')
 
 <script type="text/javascript">
-   
+    
+    $(function() {
+        var table = $('#table-indices').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route('index.all', ['id' => $book['id']]) }}',
+            columnDefs: [
+              { "width": "50%", "targets": 2 }
+            ],
+            columns: [
+                {data: 'id'},
+                {data: 'description'},
+                {data: 'page'},
+                {data: 'action'},
+            ]
+        });
+    });
+
+    var id;
+    function deleteIndex(row) {
+      $('#modal-confirm-delete .modal-title').html('System Message');
+      $('#modal-confirm-delete .modal-body p').html('Are you sure you want to delete <strong>' + row.description + '</strong>?');
+      $('#modal-confirm-delete').modal();
+
+      id = row.id;
+  }
+  $('#btn-confirm-delete').click(function(event) {
+        /* Act on the event */
+        $.ajax({
+            type: "DELETE",
+            url: '/admin/index/' + id,
+            // data: {
+            //   id : id
+            // },
+            success: function (data) {
+                
+                console.log(data);
+
+                $('#modal-confirm-delete').modal('hide');
+                dataTableRefresh('#table-indices');
+                printSuccessMsg(data.title, 'Deleted');
+
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+
+        });
+
+  });
+
+
   
-
-
-  // var url = '/admin/page/';
-  // display book tables
-   // $(function() {
-   //     $('#table-page').DataTable({
-   //          processing: true,
-   //          serverSide: true,
-   //          ajax: url + 'all/' + {{-- $book['id'] --}},
-   //          columns: [
-   //              {data: 'id', searchable: true},
-   //              {data: 'page', searchable: false},
-   //              {data: 'created_at', searchable: false},
-   //              {data: 'action', searchable: false},
-   //          ],
-   //          // "fnCreatedRow": function (row, data, index) {
-   //          //     $('td', row).eq(0).html(index + 1);
-   //          // }
-   //      });
-
-
-
-   //  });
-
-
-    // new page
-  //   $('#page-form').submit(function(e) {
-  //   /* Act on the event */
-  //     e.preventDefault();
-
-  //     var form = new FormData();
-  //     form.append('file', $('#file')[0].files[0]);
-  //     form.append('slug', $('#slug').val());
-      
-  //     $.ajax({
-  //         url: url + 'store',
-  //         data: form,
-  //         cache: false,
-  //         contentType: false,
-  //         processData: false,
-  //         type: 'POST',
-  //         success:function(response) {
-  //             console.log(response);
-
-  //               // if (response.error) {
-  //               //   printErrorMsg(response.error);
-  //               // }else {
-  //               //   $('.print-error-msg').hide();
-  //               //   $('#modal-book').modal('hide');
-  //               //   dataTableRefresh('#table-book');
-  //               //   alert('Added Successfully!');
-  //               // }
-
-  //         },
-  //         error: function(response) {
-  //           console.log('Error: ' + response)
-  //         }
-  //     });
-  // });
-  // end new page
 </script>
 
 @endsection

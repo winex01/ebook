@@ -58,6 +58,18 @@ class IndexController extends Controller
     public function show($id)
     {
         //
+        $book = Index::select('id', 'description', 'page')->where('book_id', $id);
+
+        $dt = DataTables::of($book)
+            ->addColumn('action', function ($index) {
+            return '
+                <div align="center">
+                    <button onclick="jumpTo('.htmlentities($index).')" class="btn btn-xs btn-success">Jump <i class="fa fa-hand-o-right"></i></button>
+                </div>
+            ';
+        });
+
+        return $dt->make(true);
     }
 
     /**
@@ -112,5 +124,12 @@ class IndexController extends Controller
             });
 
             return $dt->make(true);
+    }
+
+    public function jump(Request $request)
+    {
+        $url = str_replace('page=69', 'page='.$request->page, $request->url);
+
+        return response()->json(['link' => $url]); 
     }
 }

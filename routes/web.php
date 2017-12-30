@@ -69,6 +69,7 @@ Route::prefix('admin')->group(function() {
 	Route::resource('users', 'UsersController');
 
 	// index/indices
+	Route::get('index/jump/', 'IndexController@jump')->name('index.jump');
 	Route::get('index/all/{id}', 'IndexController@all')->name('index.all');
 	Route::resource('index', 'IndexController');	
 });

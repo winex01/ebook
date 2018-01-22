@@ -52,7 +52,7 @@
                             <a href="#modal-indices"  data-toggle="modal" class="btn btn-default"><i class="fa fa-eye"></i> Indices</a>
                             <a href="#modal-page-update"  data-toggle="modal" class="btn btn-default"><i class="fa fa-edit"></i>Edit</a>
                             {{-- delete --}}
-                            <a data-toggle="modal" href="#modal-confirm-delete" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                            <button id="btn-delete-page" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</button>
                           </div>
                         </div>
                         <hr>
@@ -178,7 +178,7 @@
               <h4 class="modal-title">System Message</h4>
             </div>
             <div class="modal-body">
-              <p>Are you sure you want to delete this <strong>permanently</strong>?</p>
+              <p>Are you sure you want to delete this page <strong>permanently</strong>?</p>
             
 
                <form method="POST" action="{{ url('admin/page/delete/'.$page->id) }}">
@@ -304,7 +304,7 @@
     var id;
     function deleteIndex(row) {
       $('#modal-confirm-delete .modal-title').html('System Message');
-      $('#modal-confirm-delete .modal-body p').html('Are you sure you want to delete <strong>' + row.description + '</strong>?');
+      $('#modal-confirm-delete .modal-body p').html('Are you sure you want to delete index <strong>' + row.description + '</strong>?');
       $('#modal-confirm-delete').modal();
 
       id = row.id;
@@ -334,6 +334,20 @@
 
   });
 
+
+ @if(count($pages) > 0)
+  $('#btn-delete-page').click(function(event) {
+    /* Act on the event */
+      $('#modal-confirm-delete-page .modal-title').html('System Message');
+      $('#modal-confirm-delete-page .modal-body p').html('Are you sure you want to delete this <strong>page</strong>?');
+      $('#modal-confirm-delete-page').modal();
+  });
+
+   $('#btn-confirm-delete-page').click(function(event) {
+     /* Act on the event */
+      window.location = "{{ route('page.delete', [$page->id, $book->slug]) }}";
+   });
+ @endif
 
   
 </script>

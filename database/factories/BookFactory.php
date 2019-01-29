@@ -22,8 +22,10 @@ $factory->define(App\Book::class, function (Faker $faker) {
     //get random cover
     // $cover = array_rand($covers, 2);
 
+    $title = $faker->sentence(4);
     return [
-        'title' => $faker->sentence,
+        'title' => $title,
         'description' => $paragraph,
+        'slug' => str_slug($title),
     ];
 });
